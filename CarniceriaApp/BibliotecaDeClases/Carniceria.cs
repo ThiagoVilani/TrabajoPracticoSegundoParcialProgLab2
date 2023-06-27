@@ -77,6 +77,10 @@ namespace BibliotecaDeClases
         /// <param name="productIndex"></param>
         public void NewProductOutOfStock(int productIndex)
         {
+            if(productIndex < 0)
+            {
+                throw new NumeroNegativoException($"El indice ingresado es negativo ({productIndex}). El indice debe ser siempre positivo");
+            }
             this.productsOutOfStock.Add(this.products[productIndex]);   // STANLEY
             DBConnection.InsertProduct(this.products[productIndex], "ProductsOutOfStock");
             DBConnection.DeleteProduct(this.Products[productIndex].ID);

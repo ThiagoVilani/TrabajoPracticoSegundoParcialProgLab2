@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,18 +75,30 @@ namespace BibliotecaDeClases
 
         public void ChangePrice(List<Product> products, int index, int newPrice)
         {
+            if (index < 0)
+            {
+                throw new NumeroNegativoException($"El indice ingresado es negativo ({index}). El indice debe ser siempre positivo");
+            }
             products[index].Price = newPrice;
             DBConnection.UpdatePrice(products[index].ID, newPrice);
         }
 
         public void AddStock(List<Product> products, int index, int stock)
         {
+            if (index < 0)
+            {
+                throw new NumeroNegativoException($"El indice ingresado es negativo ({index}). El indice debe ser siempre positivo");
+            }
             products[index].Stock += stock;
             DBConnection.UpdateStock(products[index].ID, stock, "+");
         }
 
         public void AddToCart(int productIndex, int quantity,List<Product> products,List<Product> cart)
         {
+            if (productIndex < 0)
+            {
+                throw new NumeroNegativoException($"El indice ingresado es negativo ({productIndex}). El indice debe ser siempre positivo");
+            }
             DBConnection.UpdateStock(products[productIndex].ID, quantity,"-");
             products[productIndex].Stock -= quantity;  // STANLEY
             for (int i = 0; i < quantity; i++)

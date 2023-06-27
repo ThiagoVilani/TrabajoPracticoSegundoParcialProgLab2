@@ -339,9 +339,10 @@ namespace TrabajoPracticoPrimerParcial
                     dgvProductsGrid.Rows[n].Cells[1].Value = productsList[i].Stock;
                     dgvProductsGrid.Rows[n].Cells[3].Value = productsList[i].Details;
                 }
-                catch
-                {
-                    MessageBox.Show("Error cargando el DataGridView");
+                catch(Exception ex) 
+                {   
+                    //throw new CargarDataGridViewException("Error cargando el DataGridView");
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
@@ -501,7 +502,7 @@ namespace TrabajoPracticoPrimerParcial
             {
                 if (carniceria.Products[i].Stock == 0)
                 {
-                    carniceria.NewProductOutOfStock(i);
+                    carniceria.NewProductOutOfStock(-1);
                     carniceria.Products.RemoveAt(i);
                     UpdateProductsGrid(carniceria.Products);
                     break;
