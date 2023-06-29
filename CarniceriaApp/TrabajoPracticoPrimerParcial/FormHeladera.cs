@@ -24,7 +24,7 @@ namespace TrabajoPracticoPrimerParcial
         Carniceria carniceria;
         int indexItemSelected;
         private System.Windows.Forms.Timer timer;
-
+        private Task t;
         //          Constructor
 
         /// <summary>
@@ -49,6 +49,7 @@ namespace TrabajoPracticoPrimerParcial
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
         }
+
 
 
         ///////////////// EVENTOS \\\\\\\\\\\\\\\\\
@@ -288,7 +289,7 @@ namespace TrabajoPracticoPrimerParcial
                 lblErrorBack.Visible = true;
             }
         }
-
+        
         private void btnReceiptsList_Click(object sender, EventArgs e)
         {
             FormReceiptHistory frh = new FormReceiptHistory(carniceria);
@@ -502,7 +503,9 @@ namespace TrabajoPracticoPrimerParcial
             {
                 if (carniceria.Products[i].Stock == 0)
                 {
-                    carniceria.NewProductOutOfStock(-1);
+                    //carniceria.NewProductOutOfStock(i);
+                    carniceria.olli(i);
+
                     carniceria.Products.RemoveAt(i);
                     UpdateProductsGrid(carniceria.Products);
                     break;

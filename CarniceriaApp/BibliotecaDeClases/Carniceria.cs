@@ -48,6 +48,9 @@ namespace BibliotecaDeClases
                 }
 
 
+        public Task task;
+
+
         // Constructor
         /// <summary>
         /// Agrega todos los clientes a la cola de clientes
@@ -65,10 +68,40 @@ namespace BibliotecaDeClases
             CurrentQuantityOfProductsInCart = 0;
             CurrentQuantityClients = Clients.Count();
             currentQuantProductsOOS = 0;
+
+            
         }
 
 
+
+
         //||||||||||||||||||FUNCIONES|||||||||||||||||||
+
+
+        public void olli(int productIndex)
+        {
+            if (productIndex < 0)
+            {
+                throw new NumeroNegativoException($"El indice ingresado es negativo ({productIndex}). El indice debe ser siempre positivo");
+            }
+
+            Task addProduct = new Task(() => this.productsOutOfStock.Add(this.products[productIndex]));
+            //this.productsOutOfStock.Add(this.products[productIndex]
+            addProduct.Start();
+            addProduct.Wait();
+
+            Task insertProduct = new Task(() =>  DBConnection.InsertProduct(this.products[productIndex], "ProductsOutOfStock"));
+            //DBConnection.InsertProduct(this.products[productIndex], "ProductsOutOfStock");
+            insertProduct.Start();
+            insertProduct.Wait();
+
+
+            Task deleteProduct = new Task(() => DBConnection.DeleteProduct(this.Products[productIndex].ID));
+            deleteProduct.Start();
+            deleteProduct.Wait();
+            //DBConnection.DeleteProduct(this.Products[productIndex].ID);
+        }
+
 
         /// <summary>
         /// Agrega un producto que se haya quedado sin stock a la lista de productos
@@ -86,10 +119,11 @@ namespace BibliotecaDeClases
             DBConnection.DeleteProduct(this.Products[productIndex].ID);
         }
 
+
         /// <summary>
         /// Actualiza el registro de la cantidad de productos fuera de stock
         /// </summary>
-        /// <returns>Retorna true si algun producto volvio a tener stock o false si no lo hizo</returns>
+        /// <returns>Retorna true si algun producto volvió a tener stock o false si no lo hizo</returns>
         public bool ChangesInStock()
         {
             if (currentQuantProductsOOS != this.productsOutOfStock.Count())

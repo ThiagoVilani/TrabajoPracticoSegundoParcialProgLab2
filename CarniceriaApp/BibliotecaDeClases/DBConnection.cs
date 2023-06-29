@@ -12,7 +12,7 @@ namespace BibliotecaDeClases
 {
     public static class DBConnection
     {
-        private static string connectionString = "Data Source=DESKTOP-1VEUT25;Initial Catalog=Carniceria; Integrated Security=True";
+        private static string connectionString = "Data Source=Thiago_Notebook;Initial Catalog=Carniceria; Integrated Security=True";
         private static SqlConnection connection = new SqlConnection();
         private static SqlCommand command;
 
@@ -89,7 +89,7 @@ namespace BibliotecaDeClases
             List<int> IDList = new List<int>();
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = "SELECT * FROM Receipts";
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
@@ -120,10 +120,7 @@ namespace BibliotecaDeClases
             {
                 List<Product> productsList = new List<Product>();
                 command.Parameters.Clear();
-                if (connection.State != ConnectionState.Open)
-                {
-                    connection.Open();
-                }
+                Open();
                 command.CommandText = "SELECT * FROM Receipts WHERE ID = @ID";
                 command.Parameters.AddWithValue("@ID", id);
                 using (SqlDataReader dataReader = command.ExecuteReader())
@@ -139,7 +136,7 @@ namespace BibliotecaDeClases
                         dataReader.Close();
                         seller = ExtractSeller(sellerID);
                         client = ExtractClient(clientID,"ClientsHistory");
-                        
+                        Open();
                         foreach (string productName in productNameList)
                         {
                             command.CommandText = $"SELECT * FROM Products WHERE nombre = '{productName}'";
@@ -175,7 +172,7 @@ namespace BibliotecaDeClases
             List<Client> clients = new List<Client>();
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"SELECT * FROM Clients";
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
@@ -206,7 +203,7 @@ namespace BibliotecaDeClases
             Product product = null;
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"SELECT TOP 1 * FROM {listType} ORDER BY ID DESC";
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
@@ -230,7 +227,7 @@ namespace BibliotecaDeClases
             List<Product> products = new List<Product>();
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"SELECT * FROM {listType}";
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
@@ -260,7 +257,7 @@ namespace BibliotecaDeClases
             Seller seller = null;
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"SELECT * FROM Sellers WHERE email = '{email}'";
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
@@ -318,7 +315,7 @@ namespace BibliotecaDeClases
             bool result = false;
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"SELECT * FROM {rol} WHERE email = '{email}'";
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
@@ -354,7 +351,7 @@ namespace BibliotecaDeClases
             try
             {
                 command.Parameters.Clear();
-                connection.Open();
+                Open();
                 command.CommandText = "SELECT * FROM prueba WHERE ID = @ID";
                 command.Parameters.AddWithValue("@ID", id);
                 using (SqlDataReader dataReader = command.ExecuteReader())
@@ -388,7 +385,7 @@ namespace BibliotecaDeClases
             }
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"INSERT INTO Receipts ([metodo pago],[ID vendedor],[ID cliente],productos,precios,subtotal,total)" +
                     $"VALUES ('{receipt.PaymentMethod}','{receipt.Seller.ID}','{receipt.Client.ID}','{products}','{prices}','{receipt.SubTotal}','{(int)receipt.Total}')";
                 command.ExecuteNonQuery();
@@ -402,7 +399,7 @@ namespace BibliotecaDeClases
         {
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"INSERT INTO ClientsHistory (ID,nombre,email,contraseña,[cantidad dinero],pedido) " +
                     $"VALUES ('{client.ID}','{client.Name}','{client.Mail}','{client.Password}','{(int)client.CantidadDinero}','{client.Pedido}')";
                 command.ExecuteNonQuery();
@@ -415,14 +412,16 @@ namespace BibliotecaDeClases
         {
             try
             {
-                connection.Open();
+                Open();
                 if (listType == "ProductsOutOfStock")
                 {
-                    command.CommandText = $"INSERT INTO {listType} (ID,nombre,[precio kilo],[stock kilos], detalles) VALUES ('{product.ID}','{product.Name}','{(int)product.Price}','{(int)product.Stock}','{product.Details}')";
+                    command.CommandText = $"INSERT INTO {listType} (ID,nombre,[precio kilo],[stock kilos], detalles) " +
+                                            $"VALUES ('{product.ID}','{product.Name}','{(int)product.Price}','{(int)product.Stock}','{product.Details}')";
                 }
                 else
                 {
-                    command.CommandText = $"INSERT INTO {listType} (nombre,[precio kilo],[stock kilos], detalles) VALUES ('{product.Name}','{(int)product.Price}','{(int)product.Stock}','{product.Details}')";
+                    command.CommandText = $"INSERT INTO {listType} (nombre,[precio kilo],[stock kilos], detalles) " +
+                                            $"VALUES ('{product.Name}','{(int)product.Price}','{(int)product.Stock}','{product.Details}')";
                 }
                 command.ExecuteNonQuery();
             }
@@ -440,7 +439,7 @@ namespace BibliotecaDeClases
         {
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = "INSERT INTO prueba (nombre,edad) VALUES ('a','456')";
                 command.ExecuteNonQuery();
             }
@@ -458,7 +457,7 @@ namespace BibliotecaDeClases
         {
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"UPDATE Clients SET [cantidad dinero] = [cantidad dinero] - {total} WHERE ID = {clientID}";
                 command.ExecuteNonQuery();
             }
@@ -470,7 +469,7 @@ namespace BibliotecaDeClases
         {
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"UPDATE Sellers SET [cantidad ventas] = {quatityOfSales} WHERE ID = {id}";
                 command.ExecuteNonQuery();
             }
@@ -482,7 +481,7 @@ namespace BibliotecaDeClases
         {
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"UPDATE Products SET [precio kilo] = {newPrice} WHERE ID = {id}";
                 command.ExecuteNonQuery();
             }
@@ -494,7 +493,7 @@ namespace BibliotecaDeClases
         {
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"UPDATE Products SET [stock kilos] = [stock kilos] {mathOperator} {quantity} WHERE ID = {id}";
                 command.ExecuteNonQuery();
             }
@@ -506,7 +505,7 @@ namespace BibliotecaDeClases
         {
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = "UPDATE prueba SET nombre = 'nombre nuevo' WHERE nombre = 'a'";
                 command.ExecuteNonQuery();
             }
@@ -519,7 +518,7 @@ namespace BibliotecaDeClases
         {
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"DELETE FROM {listType} WHERE ID = {id}";
                 command.ExecuteNonQuery();
             }
@@ -532,7 +531,7 @@ namespace BibliotecaDeClases
             InsertHistoricalClient(client);
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = $"DELETE FROM Clients WHERE ID = {client.ID}";
                 command.ExecuteNonQuery();
             }
@@ -544,7 +543,7 @@ namespace BibliotecaDeClases
         {
             try
             {
-                connection.Open();
+                Open();
                 command.CommandText = "DELETE FROM prueba WHERE nombre = 'nusdfsdohghjghg'";
                 command.ExecuteNonQuery();
             }
