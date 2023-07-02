@@ -224,9 +224,8 @@ namespace TrabajoPracticoPrimerParcial
             {
                 if (carniceria.Products[i].Stock == 0)
                 {
-                    //carniceria.NewProductOutOfStock(i);
-                    carniceria.olli(i);
-
+                    carniceria.NewProductOutOfStock(i);
+                    
                     carniceria.Products.RemoveAt(i);
                     UpdateProductsGrid(carniceria.Products);
                     break;

@@ -12,7 +12,7 @@ namespace BibliotecaDeClases
 {
     public static class DBConnection
     {
-        private static string connectionString = "Data Source=Thiago_Notebook;Initial Catalog=Carniceria; Integrated Security=True";
+        private static string connectionString = "Data Source=.;Initial Catalog=Carniceria; Integrated Security=True";
         private static SqlConnection connection = new SqlConnection();
         private static SqlCommand command;
 
@@ -23,7 +23,7 @@ namespace BibliotecaDeClases
             command.CommandType = System.Data.CommandType.Text;
             command.Connection = connection;
         }
-
+    
         public static void Open()
         {
             if (connection.State != ConnectionState.Open)
@@ -537,24 +537,6 @@ namespace BibliotecaDeClases
             }
             catch { throw; }    
             finally { connection.Close(); }
-        }
-
-        public static void Delete()
-        {
-            try
-            {
-                Open();
-                command.CommandText = "DELETE FROM prueba WHERE nombre = 'nusdfsdohghjghg'";
-                command.ExecuteNonQuery();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                connection.Close();
-            }
         }
     }
 }

@@ -59,38 +59,36 @@ namespace BibliotecaDeClases
         public Carniceria()
         {
             originalClientsList = new List<Client>(DBConnection.ExtractClients());
+            products = new List<Product>(DBConnection.ExtractProducts());
+            Task task = new Task(() => productsOutOfStock = new List<Product>(DBConnection.ExtractProducts("ProductsOutOfStock")));
+            task.Start();
             foreach (Client client in originalClientsList)
             {
                 clients.Enqueue(client);
             }
-            products = new List<Product>(DBConnection.ExtractProducts());
-            productsOutOfStock = new List<Product>(DBConnection.ExtractProducts("ProductsOutOfStock"));
             CurrentQuantityOfProductsInCart = 0;
             CurrentQuantityClients = Clients.Count();
-            currentQuantProductsOOS = 0;
+            task.Wait();
+            currentQuantProductsOOS = productsOutOfStock.Count();
 
-            
+            //originalClientsList = new List<Client>(DBConnection.ExtractClients()); esta
+            //foreach (Client client in originalClientsList) esta
+            //{
+            //    clients.Enqueue(client);
+            //}
+            //products = new List<Product>(DBConnection.ExtractProducts()); esta
+            //productsOutOfStock = new List<Product>(DBConnection.ExtractProducts("ProductsOutOfStock")); esta
+            //CurrentQuantityOfProductsInCart = 0;
+            //CurrentQuantityClients = Clients.Count();
+            //currentQuantProductsOOS = 0;
+
+
         }
 
 
 
 
         //||||||||||||||||||FUNCIONES|||||||||||||||||||
-
-
-        public async void olli(int productIndex)    //  Este metodo es la copia de NewProductOutOfStock
-        {
-            if (productIndex < 0)
-            {
-                throw new NumeroNegativoException($"El indice ingresado es negativo ({productIndex}). El indice debe ser siempre positivo");
-            }
-
-            this.productsOutOfStock.Add(this.products[productIndex]);
-            
-            DBConnection.InsertProduct(this.products[productIndex], "ProductsOutOfStock");
-
-            DBConnection.DeleteProduct(this.Products[productIndex].ID);
-        }
 
 
         /// <summary>
@@ -104,7 +102,7 @@ namespace BibliotecaDeClases
             {
                 throw new NumeroNegativoException($"El indice ingresado es negativo ({productIndex}). El indice debe ser siempre positivo");
             }
-            this.productsOutOfStock.Add(this.products[productIndex]);   // STANLEY
+            this.productsOutOfStock.Add(this.products[productIndex]);
             DBConnection.InsertProduct(this.products[productIndex], "ProductsOutOfStock");
             DBConnection.DeleteProduct(this.Products[productIndex].ID);
         }
@@ -118,7 +116,7 @@ namespace BibliotecaDeClases
         {
             if (currentQuantProductsOOS != this.productsOutOfStock.Count())
             {
-                currentQuantProductsOOS = this.productsOutOfStock.Count(); //STANLEY (en realidad esta parte hay que cambiarla si decido eliminar las listas para siempre)
+                currentQuantProductsOOS = this.productsOutOfStock.Count();
                 return true;
             }
             else { return false; }

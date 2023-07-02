@@ -62,23 +62,26 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="e"></param>
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (carniceria.ChangeQuantityProducts())
+            Task.Run(() =>
             {
-                UpdateLVCart();
-                UpdateProductsGrid(carniceria.Products);
-            }
-            if (carniceria.ChangeQuantityClients())
-            {
-                UpdateLVClients();
-            }
-            if (carniceria.ChangesInStock())
-            {
-                UpdateProductsGrid(carniceria.Products);
-            }
-            if (EnableBtnAddNewCut())
-            {
-                btnAddCut.Enabled = true;
-            }
+                if (carniceria.ChangeQuantityProducts())
+                {
+                    UpdateLVCart();
+                    UpdateProductsGrid(carniceria.Products);
+                }
+                if (carniceria.ChangeQuantityClients())
+                {
+                    UpdateLVClients();
+                }
+                if (carniceria.ChangesInStock())
+                {
+                    UpdateProductsGrid(carniceria.Products);
+                }
+                if (EnableBtnAddNewCut())
+                {
+                    btnAddCut.Enabled = true;
+                }
+            });
         }
 
         /// <summary>
@@ -503,7 +506,7 @@ namespace TrabajoPracticoPrimerParcial
             {
                 if (carniceria.Products[i].Stock == 0)
                 {
-                    carniceria.NewProductOutOfStock(i);//   El problema es que el producto se multiplica en la tabla de productos cuando uno llega a 0 de stock
+                    carniceria.NewProductOutOfStock(i);
                     carniceria.Products.RemoveAt(i);
                     UpdateProductsGrid(carniceria.Products);
                     break;
