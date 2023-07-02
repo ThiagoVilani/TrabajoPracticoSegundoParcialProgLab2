@@ -24,7 +24,7 @@ namespace TrabajoPracticoPrimerParcial
         Carniceria carniceria;
         int indexItemSelected;
         private System.Windows.Forms.Timer timer;
-        private Task t;
+        private Task t1;
         //          Constructor
 
         /// <summary>
@@ -48,6 +48,7 @@ namespace TrabajoPracticoPrimerParcial
             timer.Interval = 1000;
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
+
         }
 
 
@@ -493,19 +494,16 @@ namespace TrabajoPracticoPrimerParcial
             }
         }
 
-
         /// <summary>
         /// Comprueba que producto esta sin stock y lo vuelve invisble ante el usuario
         /// </summary>
-        private void IsOutOfStock()
+        private async void IsOutOfStock()
         {
             for (int i = 0; i < carniceria.Products.Count; i++)
             {
                 if (carniceria.Products[i].Stock == 0)
                 {
-                    //carniceria.NewProductOutOfStock(i);
-                    carniceria.olli(i);
-
+                    carniceria.NewProductOutOfStock(i);//   El problema es que el producto se multiplica en la tabla de productos cuando uno llega a 0 de stock
                     carniceria.Products.RemoveAt(i);
                     UpdateProductsGrid(carniceria.Products);
                     break;

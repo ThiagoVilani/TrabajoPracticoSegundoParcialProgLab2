@@ -78,28 +78,18 @@ namespace BibliotecaDeClases
         //||||||||||||||||||FUNCIONES|||||||||||||||||||
 
 
-        public void olli(int productIndex)
+        public async void olli(int productIndex)    //  Este metodo es la copia de NewProductOutOfStock
         {
             if (productIndex < 0)
             {
                 throw new NumeroNegativoException($"El indice ingresado es negativo ({productIndex}). El indice debe ser siempre positivo");
             }
 
-            Task addProduct = new Task(() => this.productsOutOfStock.Add(this.products[productIndex]));
-            //this.productsOutOfStock.Add(this.products[productIndex]
-            addProduct.Start();
-            addProduct.Wait();
+            this.productsOutOfStock.Add(this.products[productIndex]);
+            
+            DBConnection.InsertProduct(this.products[productIndex], "ProductsOutOfStock");
 
-            Task insertProduct = new Task(() =>  DBConnection.InsertProduct(this.products[productIndex], "ProductsOutOfStock"));
-            //DBConnection.InsertProduct(this.products[productIndex], "ProductsOutOfStock");
-            insertProduct.Start();
-            insertProduct.Wait();
-
-
-            Task deleteProduct = new Task(() => DBConnection.DeleteProduct(this.Products[productIndex].ID));
-            deleteProduct.Start();
-            deleteProduct.Wait();
-            //DBConnection.DeleteProduct(this.Products[productIndex].ID);
+            DBConnection.DeleteProduct(this.Products[productIndex].ID);
         }
 
 
