@@ -62,13 +62,19 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="e"></param>
         private void timer_Tick(object sender, EventArgs e)
         {
-            Task.Run(() =>
+            if (carniceria.ChangeQuantityProducts())
             {
-                if (carniceria.ChangeQuantityProducts())
+                Task.Run(() =>
                 {
-                    UpdateLVCart();
-                    UpdateProductsGrid(carniceria.Products);
-                }
+                    Invoke((MethodInvoker)delegate
+                    {
+                        UpdateLVCart(); 
+                        UpdateProductsGrid(carniceria.Products);
+                    });
+                });
+                //UpdateLVCart();
+                //UpdateProductsGrid(carniceria.Products);
+            }
                 if (carniceria.ChangeQuantityClients())
                 {
                     UpdateLVClients();
@@ -81,7 +87,6 @@ namespace TrabajoPracticoPrimerParcial
                 {
                     btnAddCut.Enabled = true;
                 }
-            });
         }
 
         /// <summary>

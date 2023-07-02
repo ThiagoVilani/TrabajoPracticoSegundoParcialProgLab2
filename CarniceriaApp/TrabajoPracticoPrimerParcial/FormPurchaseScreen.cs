@@ -41,16 +41,16 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="e"></param>
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (carniceria.ChangeQuantityProducts())
-            {
-                UpdateLVCart();
-                UpdateProductsGrid(carniceria.Products);
-                lblRemainingMoney.Text = $"Dinero restante: {carniceria.CurrentClient.CantidadDinero - carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart)}";
-                if (carniceria.CurrentClient.CantidadDinero - carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart) < 0)
+                if (carniceria.ChangeQuantityProducts())
                 {
-                    lblRemainingMoney.Text = "Dinero restante: 0";
+                    UpdateLVCart();
+                    UpdateProductsGrid(carniceria.Products);
+                    lblRemainingMoney.Text = $"Dinero restante: {carniceria.CurrentClient.CantidadDinero - carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart)}";
+                    if (carniceria.CurrentClient.CantidadDinero - carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart) < 0)
+                    {
+                        lblRemainingMoney.Text = "Dinero restante: 0";
+                    }
                 }
-            }
         }
 
         /// <summary>
