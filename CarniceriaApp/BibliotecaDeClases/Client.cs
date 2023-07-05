@@ -7,7 +7,9 @@
     {
         public double CantidadDinero { get; set; }
         public string Pedido { get;}
-        public int ID { get;}
+
+        private static int IDCount = 1000;
+        public int ID { get; private set; }
         /// <summary>
         /// Inicializa los atributos de dinero y toma el pedido
         /// </summary>
@@ -20,6 +22,8 @@
         {
             this.CantidadDinero = cantidadDinero;
             this.Pedido = pedido;
+            IDCount++;
+            this.ID = IDCount;
         }
         public Client(string name, float cantidadDinero, string pedido, string mail, string password,int ID) : base(name, mail, password)
         {

@@ -14,6 +14,7 @@ namespace TrabajoPracticoPrimerParcial
     public partial class FormSellerMenu : Form
     {
         Carniceria carniceria;
+
         public FormSellerMenu(Carniceria carniceria)
         {
             InitializeComponent();

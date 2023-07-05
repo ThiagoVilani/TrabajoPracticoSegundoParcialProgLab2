@@ -22,6 +22,8 @@ namespace BibliotecaDeClases
     public class Carniceria
     {
         //Atributos y Propiedades
+        public SellersDBConnection sellersDBC;
+        public ClientsDBConnection clientsDBC;
         private int currentQuantProductsOOS;
         private List<Product> productsOutOfStock;
         public List<Product> ProductsOutOfStock {  get { return productsOutOfStock; } }
@@ -50,19 +52,19 @@ namespace BibliotecaDeClases
         public void StockExpansionPOOS(int index)
         {
             this.ProductsOutOfStock[index].Stock++;
-            DBConnection.UpdateStock(this.ProductsOutOfStock[index].ID, 1, "+");
+            CarniceriaDBConnection.UpdateStock(this.ProductsOutOfStock[index].ID, 1, "+");
 
             this.Products.Add(this.ProductsOutOfStock[index]);
-            DBConnection.InsertProduct(this.ProductsOutOfStock[index]);
+            CarniceriaDBConnection.InsertProduct(this.ProductsOutOfStock[index]);
 
-            DBConnection.DeleteProduct(this.ProductsOutOfStock[index].ID, "ProductsOutOfStock");
+            CarniceriaDBConnection.DeleteProduct(this.ProductsOutOfStock[index].ID, "ProductsOutOfStock");
             this.ProductsOutOfStock.RemoveAt(index);
         }
 
         public void StockExpansion(int index)
         {
             this.Products[index].Stock++;
-            DBConnection.UpdateStock(this.Products[index].ID, 1, "+");
+            CarniceriaDBConnection.UpdateStock(this.Products[index].ID, 1, "+");
         }
 
 
@@ -73,9 +75,11 @@ namespace BibliotecaDeClases
         /// </summary>
         public Carniceria()
         {
-            originalClientsList = new List<Client>(DBConnection.ExtractClients());
-            products = new List<Product>(DBConnection.ExtractProducts());
-            Task task = new Task(() => productsOutOfStock = new List<Product>(DBConnection.ExtractProducts("ProductsOutOfStock")));
+            this.clientsDBC = new ClientsDBConnection();
+            this.sellersDBC = new SellersDBConnection();
+            originalClientsList = new List<Client>(clientsDBC.ExtractList());
+            products = new List<Product>(CarniceriaDBConnection.ExtractProducts());
+            Task task = new Task(() => productsOutOfStock = new List<Product>(CarniceriaDBConnection.ExtractProducts("ProductsOutOfStock")));
             task.Start();
             foreach (Client client in originalClientsList)
             {
@@ -105,8 +109,8 @@ namespace BibliotecaDeClases
                 throw new NumeroNegativoException($"El indice ingresado es negativo ({productIndex}). El indice debe ser siempre positivo");
             }
             this.productsOutOfStock.Add(this.products[productIndex]);
-            DBConnection.InsertProduct(this.products[productIndex], "ProductsOutOfStock");
-            DBConnection.DeleteProduct(this.Products[productIndex].ID);
+            CarniceriaDBConnection.InsertProduct(this.products[productIndex], "ProductsOutOfStock");
+            CarniceriaDBConnection.DeleteProduct(this.Products[productIndex].ID);
         }
 
 

@@ -17,7 +17,8 @@ namespace BibliotecaDeClases
         TypesOfEmployees role;
         MonthlySalary salary;
         public int QuantityOfSales { get; set; }
-        public int ID { get;}
+        private static int IDCount = 1000;
+        public int ID { get; private set; }
 
 
 
@@ -32,6 +33,8 @@ namespace BibliotecaDeClases
             this.role = TypesOfEmployees.Vendedor;
             this.salary = MonthlySalary.FourthLevel;
             this.QuantityOfSales = quantityOfSales;
+            IDCount++;
+            this.ID = IDCount;
         }
         public Seller(string name, string mail, string password, int quantityOfSales,int id) : base(name, mail, password)
         {
@@ -100,7 +103,7 @@ namespace BibliotecaDeClases
                 throw new NumeroNegativoException($"El indice ingresado es negativo ({index}). El indice debe ser siempre positivo");
             }
             products[index].Price = newPrice;
-            DBConnection.UpdatePrice(products[index].ID, newPrice);
+            CarniceriaDBConnection.UpdatePrice(products[index].ID, newPrice);
         }
 
         public void AddStock(List<Product> products, int index, int stock)
@@ -110,7 +113,7 @@ namespace BibliotecaDeClases
                 throw new NumeroNegativoException($"El indice ingresado es negativo ({index}). El indice debe ser siempre positivo");
             }
             products[index].Stock += stock;
-            DBConnection.UpdateStock(products[index].ID, stock, "+");
+            CarniceriaDBConnection.UpdateStock(products[index].ID, stock, "+");
         }
 
         public void AddToCart(int productIndex, int quantity,List<Product> products,List<Product> cart)
@@ -119,7 +122,7 @@ namespace BibliotecaDeClases
             {
                 throw new NumeroNegativoException($"El indice ingresado es negativo ({productIndex}). El indice debe ser siempre positivo");
             }
-            DBConnection.UpdateStock(products[productIndex].ID, quantity,"-");
+            CarniceriaDBConnection.UpdateStock(products[productIndex].ID, quantity,"-");
             products[productIndex].Stock -= quantity;  // STANLEY
             for (int i = 0; i < quantity; i++)
             {
@@ -157,7 +160,7 @@ namespace BibliotecaDeClases
             {
                 if (!isClient)
                 {
-                    DBConnection.UpdateClientMoney(Clients.Peek().ID, (int)total);
+                    ClientsDBConnection.UpdateClientMoney(Clients.Peek().ID, (int)total);
                     Clients.Peek().CantidadDinero -= total; // STANLEY
                     if (Clients.Count() > 0)
                     {
@@ -166,7 +169,7 @@ namespace BibliotecaDeClases
                     else
                     {
                         this.QuantityOfSales++;
-                        DBConnection.UpdateSales(this.ID, this.QuantityOfSales);
+                        SellersDBConnection.UpdateSales(this.ID, this.QuantityOfSales);
                     }
                 }
                 return true;

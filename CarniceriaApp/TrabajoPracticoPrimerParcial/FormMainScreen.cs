@@ -7,13 +7,18 @@ namespace TrabajoPracticoPrimerParcial
     public partial class FormMainScreen : Form
     {
         public Carniceria carniceria;
-
+        public SellersDBConnection sellerDBC;
+        public ClientsDBConnection clientDBC;
 
         public FormMainScreen(Carniceria carniceria)
         {
             InitializeComponent();
+            this.clientDBC = new ClientsDBConnection();
+            this.sellerDBC = new SellersDBConnection();  
+            DBConnection.meterproducto();
+            DBConnection.meterclientes(clientDBC);
+            DBConnection.metervendedores(sellerDBC);
             this.carniceria = carniceria;
-            //DBConnection.meterproducto();
         }
 
 
@@ -25,9 +30,9 @@ namespace TrabajoPracticoPrimerParcial
         private void btnVendedor_Click(object sender, EventArgs e)
         {
             Sounds.PlayClickSound3();
-            if(DBConnection.Coincidence(txtbMail.Text.ToLower(),txtbPassword.Text,"Sellers"))
+            if(carniceria.sellersDBC.ValidateCredentials(txtbMail.Text.ToLower(),txtbPassword.Text))
             {
-                carniceria.CurrentSeller = DBConnection.ExtractSeller(txtbMail.Text.ToLower(), txtbPassword.Text);
+                carniceria.CurrentSeller = carniceria.sellersDBC.ExtractUser(txtbMail.Text.ToLower(), txtbPassword.Text);
                 FormSellerMenu menu = new FormSellerMenu(this.carniceria);
                 menu.Show();
                 this.Hide();
@@ -48,13 +53,13 @@ namespace TrabajoPracticoPrimerParcial
         private void btnCliente_Click(object sender, EventArgs e)
         {
             Sounds.PlayClickSound3();
-            if(DBConnection.Coincidence(txtbMail.Text.ToLower(),txtbPassword.Text,"Clients")||DBConnection.Coincidence(txtbMail.Text.ToLower(), txtbPassword.Text, "ClientsHistory"))
+            if(carniceria.clientsDBC.ValidateCredentials(txtbMail.Text.ToLower(),txtbPassword.Text))
             {
-                carniceria.CurrentSeller = DBConnection.ExtractSeller(5);
-                carniceria.CurrentClient = DBConnection.ExtractClient(txtbMail.Text.ToLower(), txtbPassword.Text);
+                carniceria.CurrentSeller = this.sellerDBC.ExtractUser(5);   // Cambiar el ID
+                carniceria.CurrentClient = this.clientDBC.ExtractUser(txtbMail.Text.ToLower(), txtbPassword.Text);
                 if(carniceria.CurrentClient == null)
                 {
-                    carniceria.CurrentClient = DBConnection.ExtractClient(txtbMail.Text.ToLower(), txtbPassword.Text,"ClientsHistory");
+                    carniceria.CurrentClient = this.clientDBC.ExtractUser(txtbMail.Text.ToLower(), txtbPassword.Text);
                 }
                 FormLoginUser formLoginUser = new FormLoginUser(carniceria);
                 formLoginUser.Show();

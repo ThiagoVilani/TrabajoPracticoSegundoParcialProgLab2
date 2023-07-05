@@ -16,10 +16,14 @@ namespace TrabajoPracticoPrimerParcial
     public partial class FormLoginUser : Form
     {
         Carniceria carniceria;
+        SellersDBConnection sellerDBC;
+        ClientsDBConnection clientDBC;
         public FormLoginUser(Carniceria carniceria)
         {
             InitializeComponent();
             this.carniceria = carniceria;
+            this.sellerDBC = sellerDBC;
+            this.clientDBC = clientDBC;
             ConfPosOfElements();
         }
 

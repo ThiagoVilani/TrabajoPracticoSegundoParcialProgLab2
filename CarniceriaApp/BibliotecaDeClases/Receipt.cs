@@ -8,7 +8,8 @@ namespace BibliotecaDeClases
 {
     public class Receipt
     {
-        private int ID;
+        private static int IDCount = 1000;
+        public int ID { get; private set; }
         public string PaymentMethod { get; }
         public Seller Seller { get; }
         public Client Client { get;}
@@ -31,6 +32,8 @@ namespace BibliotecaDeClases
             this.Seller = seller;
             this.Client = client;
             this.PaymentMethod = paymentMethod;
+            IDCount++;
+            this.ID = IDCount;
         }
         public Receipt(List<Product> productsList, double subTotal, double total, Seller seller, Client client, string paymentMethod,int ID)
         {

@@ -16,12 +16,17 @@ namespace TrabajoPracticoPrimerParcial
     {
         bool isClient;
         Carniceria carniceria;
+        SellersDBConnection sellerDBC;
+        ClientsDBConnection clientDBC;
+
         public FormPaymentMethods(Carniceria carniceria, bool isClient)
         {
             InitializeComponent();
             ConfPosOfElements();
             this.carniceria = carniceria;
             this.isClient = isClient;
+            this.sellerDBC = sellerDBC;
+            this.clientDBC = clientDBC;
         }
 
 
@@ -45,7 +50,7 @@ namespace TrabajoPracticoPrimerParcial
                     {
                         if (!isClient)
                         {
-                            DBConnection.DeleteClient(carniceria.Clients.Peek());  //  STANLEY
+                            carniceria.clientsDBC.DeleteUser(carniceria.Clients.Peek());  //  STANLEY
                             carniceria.Clients.Dequeue();
                         }
                         Receipt receipt = new Receipt(carniceria.Cart,
@@ -53,7 +58,7 @@ namespace TrabajoPracticoPrimerParcial
                                                         carniceria.CurrentSeller.CalculateTotal(radioButton.Text,carniceria.Cart),
                                                         carniceria.CurrentSeller,
                                                         carniceria.CurrentClient,radioButton.Text);
-                        DBConnection.InsertReceipt(receipt);
+                        CarniceriaDBConnection.InsertReceipt(receipt);
                         carniceria.ReceiptList.Add(receipt);
                         FormReceipt formreceipt = new FormReceipt(receipt,carniceria);
                         formreceipt.Show();

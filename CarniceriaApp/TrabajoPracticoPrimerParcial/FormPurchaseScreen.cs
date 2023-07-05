@@ -16,11 +16,16 @@ namespace TrabajoPracticoPrimerParcial
         private System.Windows.Forms.Timer timer;
         int indexItemSelected;
         Carniceria carniceria;
+        SellersDBConnection sellerDBC;
+        ClientsDBConnection clientDBC;
+
         public FormPurchaseScreen(Carniceria carniceria)
         {
             InitializeComponent();
             this.carniceria = carniceria;
-            AddRowOfProducts(DBConnection.ExtractProducts());
+            this.sellerDBC = sellerDBC;
+            this.clientDBC = clientDBC;
+            AddRowOfProducts(CarniceriaDBConnection.ExtractProducts());
             ConfigureListView();
             indexItemSelected = -1;
             lblRemainingMoney.Text = $"Dinero restante: {carniceria.CurrentClient.CantidadDinero}";

@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace BibliotecaDeClases
 {
-    public class CarniceriaDBConnection
+    public static class CarniceriaDBConnection
     {
         private static string connectionString = "Data Source=.;Initial Catalog=Carniceria; Integrated Security=True";
         private static SqlConnection connection = new SqlConnection();
         private static SqlCommand command;
 
-        public CarniceriaDBConnection()
+        static CarniceriaDBConnection()
         {
             connection.ConnectionString = connectionString;
             command = new SqlCommand();
@@ -31,7 +31,7 @@ namespace BibliotecaDeClases
         }
 
 
-        public static List<Receipt> ExtractReceiptsList()
+        public static List<Receipt> ExtractReceiptsList(SellersDBConnection sellerDBC, ClientsDBConnection clientDBC)
         {
             List<Receipt> receipts = new List<Receipt>();
             List<int> IDList = new List<int>();
@@ -48,7 +48,7 @@ namespace BibliotecaDeClases
                 }
                 for (int i = 0; i < IDList.Count(); i++)
                 {
-                    receipts.Add(ExtractReceipt(IDList[i]));
+                    receipts.Add(ExtractReceipt(IDList[i],sellerDBC,clientDBC));
                 }
                 return receipts;
             }

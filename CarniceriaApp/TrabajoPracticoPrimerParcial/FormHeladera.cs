@@ -22,6 +22,8 @@ namespace TrabajoPracticoPrimerParcial
     {
         //          Atributos y Propiedades
         Carniceria carniceria;
+        SellersDBConnection sellerDBC;
+        ClientsDBConnection clientDBC;
         int indexItemSelected;
         private System.Windows.Forms.Timer timer;
      
@@ -38,6 +40,8 @@ namespace TrabajoPracticoPrimerParcial
             InitializeComponent();
 
             this.carniceria = carniceria;
+            this.sellerDBC = sellerDBC;
+            this.clientDBC = clientDBC;
             AddRow(carniceria.Products);
             ConfigureListView();
             AddRowClients();
@@ -509,9 +513,9 @@ namespace TrabajoPracticoPrimerParcial
             double stock = double.Parse(txtbNewCutStock.Text);
             if (price > 0 && stock > 0)
             {
-                DBConnection.InsertProduct(new Product(name, price, stock, details));
+                CarniceriaDBConnection.InsertProduct(new Product(name, price, stock, details));
                 //carniceria.Products.Add(new Product(name, price, stock, details));
-                carniceria.Products.Add(DBConnection.ExtractLastProduct());
+                carniceria.Products.Add(CarniceriaDBConnection.ExtractLastProduct());
                 UpdateAll();
             }
         }
