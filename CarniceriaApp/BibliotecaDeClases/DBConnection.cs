@@ -359,34 +359,7 @@ namespace BibliotecaDeClases
             }
         }
 
-        public static string Read(int id)
-        {
-            string nombre = "añg";
-            try
-            {
-                command.Parameters.Clear();
-                Open();
-                command.CommandText = "SELECT * FROM prueba WHERE ID = @ID";
-                command.Parameters.AddWithValue("@ID", id);
-                using (SqlDataReader dataReader = command.ExecuteReader())
-                {
-
-                    while (dataReader.Read())
-                    {
-                        nombre = dataReader["nombre"].ToString();
-                    }
-                }
-                return nombre;
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
+        
 
         public static void InsertReceipt(Receipt receipt)
         {
