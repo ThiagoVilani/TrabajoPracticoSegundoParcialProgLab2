@@ -6794,11 +6794,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\Tests\\Tests.csproj",
+      "projectUniqueName": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\Tests\\Tests.csproj",
       "projectName": "Tests",
-      "projectPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\Tests\\Tests.csproj",
+      "projectPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\Tests\\Tests.csproj",
       "packagesPath": "C:\\Users\\vilan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\Tests\\obj\\",
+      "outputPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\Tests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vilan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6815,8 +6815,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
-              "projectPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj"
+            "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
+              "projectPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj"
             }
           }
         }

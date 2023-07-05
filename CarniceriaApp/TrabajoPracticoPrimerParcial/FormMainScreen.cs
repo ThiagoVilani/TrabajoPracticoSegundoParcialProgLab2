@@ -15,9 +15,9 @@ namespace TrabajoPracticoPrimerParcial
             InitializeComponent();
             this.clientDBC = new ClientsDBConnection();
             this.sellerDBC = new SellersDBConnection();  
-            DBConnection.meterproducto();
-            DBConnection.meterclientes(clientDBC);
-            DBConnection.metervendedores(sellerDBC);
+            //DBConnection.meterproducto();
+            //DBConnection.meterclientes(clientDBC);
+            //DBConnection.metervendedores(sellerDBC);
             this.carniceria = carniceria;
         }
 

@@ -36,7 +36,7 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"INSERT INTO Clients (ID,nombre,email,contraseña,[cantidad ventas]) " +
+                command.CommandText = $"INSERT INTO Sellers (ID,nombre,email,contraseña,[cantidad ventas]) " +
                                       $"VALUES ('{seller.ID}','{seller.Name}','{seller.Mail}','{seller.Password}','{(int)seller.QuantityOfSales}')";
                 command.ExecuteNonQuery();
             }

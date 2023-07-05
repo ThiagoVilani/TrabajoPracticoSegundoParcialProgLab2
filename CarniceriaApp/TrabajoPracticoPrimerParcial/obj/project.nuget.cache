@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LmvLGNCVavT0W893N5fgkNR6GvFbpYk7fQWBEJSS2B/YFLLx+xVkDUD4mWBd4N7hbW6fOwjoUjhAMbu6BFwJmg==",
+  "dgSpecHash": "dK5kQkE1pygsc+DTMPBTiqvhbb08No56D6aYqQ9bdQicsDuFOos0OiKLmQMwtepyTrZXJMtz8W6QW02DZWNSZA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
+  "projectFilePath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vilan\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\vilan\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

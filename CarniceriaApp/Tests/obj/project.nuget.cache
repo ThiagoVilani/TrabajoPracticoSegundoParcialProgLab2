@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iYXY3hC6QrsFZXHTsMfjhF7qC/vrT3JcILe5TcWpHTv6ouTDpU4HmGsYUJ0Kz1mevQ/D0KF9TyoSpMxkHPDIqA==",
+  "dgSpecHash": "3Ih3mTxC+K4wyl1JHfsI/iyuZQCwX/M/FTP6Zi5pORFijb8T7qN/fighjQysmUkcJn2lV8xishexPNWSEje7tQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\Tests\\Tests.csproj",
+  "projectFilePath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\Tests\\Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vilan\\.nuget\\packages\\coverlet.collector\\3.1.2\\coverlet.collector.3.1.2.nupkg.sha512",
     "C:\\Users\\vilan\\.nuget\\packages\\microsoft.codecoverage\\17.1.0\\microsoft.codecoverage.17.1.0.nupkg.sha512",
