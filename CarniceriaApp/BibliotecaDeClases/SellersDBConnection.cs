@@ -97,13 +97,13 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"SELECT * FROM Clients WHERE email = '{email}'";
+                command.CommandText = $"SELECT * FROM Sellers WHERE email = '{email}'";
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
                     while (dataReader.Read())
                     {
                         dataReader.Close();
-                        command.CommandText = $"SELECT * FROM Clients WHERE contraseña = '{password}'";
+                        command.CommandText = $"SELECT * FROM Sellers WHERE contraseña = '{password}'";
                         using (SqlDataReader dataReader2 = command.ExecuteReader())
                         {
                             while (dataReader2.Read())
