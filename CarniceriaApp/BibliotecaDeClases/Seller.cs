@@ -38,7 +38,27 @@ namespace BibliotecaDeClases
             this.ID = id;
         }
 
+        public delegate void StockExpansionPOOS(int index); //  POOS: Producto out of Stock
+        public event StockExpansionPOOS StockIncreasedPOOS;
 
+        public void AlertStockIncreasePOOS(int index)
+        {
+            if (StockIncreasedPOOS != null)
+            {
+                StockIncreasedPOOS(index);
+            }
+        }
+
+        public delegate void StockExpansion(int index);
+        public event StockExpansion StockIncreased;
+
+        public void AlertStockIncrease(int index)
+        {
+            if (StockIncreased!= null)
+            {
+                StockIncreased(index);
+            }
+        }
 
         /// <summary>
         /// Compara un mail con el mail de un Objeto del tipo Seller

@@ -16,12 +16,26 @@ namespace BibliotecaDeClases
         private static SqlConnection connection = new SqlConnection();
         private static SqlCommand command;
 
+
         static DBConnection()
         {
             connection.ConnectionString = connectionString;
             command = new SqlCommand();
             command.CommandType = System.Data.CommandType.Text;
             command.Connection = connection;
+        }
+        public static void meterproducto()
+        {
+            List<Product> lista = new List<Product>();
+            lista.Add(new Product("Asado", 1230, 12, "es asado"));
+            lista.Add(new Product("Chorizo", 1530, 10, "es chorizo"));
+            lista.Add(new Product("Molleja", 1110, 11, "es molleja"));
+            lista.Add(new Product("bondiola", 3230, 5, "es bondiola"));
+            lista.Add(new Product("roast beed", 1630, 22, "es rb"));
+            foreach (Product p in lista)
+            {
+                DBConnection.InsertProduct(p);
+            }
         }
     
         public static void Open()
@@ -413,16 +427,9 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                if (listType == "ProductsOutOfStock")
-                {
-                    command.CommandText = $"INSERT INTO {listType} (ID,nombre,[precio kilo],[stock kilos], detalles) " +
-                                            $"VALUES ('{product.ID}','{product.Name}','{(int)product.Price}','{(int)product.Stock}','{product.Details}')";
-                }
-                else
-                {
-                    command.CommandText = $"INSERT INTO {listType} (nombre,[precio kilo],[stock kilos], detalles) " +
-                                            $"VALUES ('{product.Name}','{(int)product.Price}','{(int)product.Stock}','{product.Details}')";
-                }
+                command.CommandText = $"INSERT INTO {listType} (ID,nombre,[precio kilo],[stock kilos], detalles) " +
+                                      $"VALUES ('{product.ID}','{product.Name}','{(int)product.Price}','{(int)product.Stock}','{product.Details}')";
+                
                 command.ExecuteNonQuery();
             }
             catch
@@ -435,23 +442,6 @@ namespace BibliotecaDeClases
             }
         }
 
-        public static void Insert()
-        {
-            try
-            {
-                Open();
-                command.CommandText = "INSERT INTO prueba (nombre,edad) VALUES ('a','456')";
-                command.ExecuteNonQuery();
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
 
         public static void UpdateClientMoney(int clientID, int total)
         {
@@ -495,18 +485,6 @@ namespace BibliotecaDeClases
             {
                 Open();
                 command.CommandText = $"UPDATE Products SET [stock kilos] = [stock kilos] {mathOperator} {quantity} WHERE ID = {id}";
-                command.ExecuteNonQuery();
-            }
-            catch { throw; }
-            finally { connection.Close(); }
-        }
-
-        public static void Update()
-        {
-            try
-            {
-                Open();
-                command.CommandText = "UPDATE prueba SET nombre = 'nombre nuevo' WHERE nombre = 'a'";
                 command.ExecuteNonQuery();
             }
             catch { throw; }

@@ -12,7 +12,8 @@ namespace TrabajoPracticoPrimerParcial
         public FormMainScreen(Carniceria carniceria)
         {
             InitializeComponent();
-            this.carniceria = carniceria;//Harcodeo la cantidad de clientes incial
+            this.carniceria = carniceria;
+            //DBConnection.meterproducto();
         }
 
 
@@ -49,7 +50,7 @@ namespace TrabajoPracticoPrimerParcial
             Sounds.PlayClickSound3();
             if(DBConnection.Coincidence(txtbMail.Text.ToLower(),txtbPassword.Text,"Clients")||DBConnection.Coincidence(txtbMail.Text.ToLower(), txtbPassword.Text, "ClientsHistory"))
             {
-                carniceria.CurrentSeller = DBConnection.ExtractSeller(2);
+                carniceria.CurrentSeller = DBConnection.ExtractSeller(5);
                 carniceria.CurrentClient = DBConnection.ExtractClient(txtbMail.Text.ToLower(), txtbPassword.Text);
                 if(carniceria.CurrentClient == null)
                 {

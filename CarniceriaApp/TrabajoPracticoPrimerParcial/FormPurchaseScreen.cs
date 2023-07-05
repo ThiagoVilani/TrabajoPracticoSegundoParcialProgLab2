@@ -21,7 +21,6 @@ namespace TrabajoPracticoPrimerParcial
             InitializeComponent();
             this.carniceria = carniceria;
             AddRowOfProducts(DBConnection.ExtractProducts());
-//            AddRowOfProducts(carniceria.Products);
             ConfigureListView();
             indexItemSelected = -1;
             lblRemainingMoney.Text = $"Dinero restante: {carniceria.CurrentClient.CantidadDinero}";
@@ -30,6 +29,9 @@ namespace TrabajoPracticoPrimerParcial
             timer.Interval = 1000;
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
+
+            carniceria.CurrentSeller.StockIncreasedPOOS += carniceria.StockExpansionPOOS;
+            carniceria.CurrentSeller.StockIncreased += carniceria.StockExpansion;
         }
 
 
@@ -41,16 +43,22 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="e"></param>
         private void timer_Tick(object sender, EventArgs e)
         {
-                if (carniceria.ChangeQuantityProducts())
+            if (carniceria.ChangeQuantityProducts())
+            {
+                Task.Run(() =>
                 {
-                    UpdateLVCart();
-                    UpdateProductsGrid(carniceria.Products);
-                    lblRemainingMoney.Text = $"Dinero restante: {carniceria.CurrentClient.CantidadDinero - carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart)}";
-                    if (carniceria.CurrentClient.CantidadDinero - carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart) < 0)
+                    Invoke((MethodInvoker)delegate
                     {
-                        lblRemainingMoney.Text = "Dinero restante: 0";
-                    }
-                }
+                        UpdateLVCart();
+                        UpdateProductsGrid(carniceria.Products);
+                        lblRemainingMoney.Text = $"Dinero restante: {carniceria.CurrentClient.CantidadDinero - carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart)}";
+                        if (carniceria.CurrentClient.CantidadDinero - carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart) < 0)
+                        {
+                            lblRemainingMoney.Text = "Dinero restante: 0";
+                        }
+                    });
+                });                
+            }
         }
 
         /// <summary>
@@ -133,8 +141,7 @@ namespace TrabajoPracticoPrimerParcial
                 {
                     if (carniceria.Products[count].Name == carniceria.Cart[indexItemSelected].Name)
                     {
-                        carniceria.Products[count].Stock++;
-                        DBConnection.UpdateStock(carniceria.Products[count].ID, 1, "+");
+                        carniceria.CurrentSeller.AlertStockIncrease(count);
                     }
                     else
                     {
@@ -142,14 +149,7 @@ namespace TrabajoPracticoPrimerParcial
                         {
                             if (carniceria.ProductsOutOfStock[i].Name == carniceria.Cart[indexItemSelected].Name)
                             {
-                                carniceria.ProductsOutOfStock[i].Stock++;
-                                DBConnection.UpdateStock(carniceria.ProductsOutOfStock[i].ID, 1, "+");
-
-                                carniceria.Products.Add(carniceria.ProductsOutOfStock[i]);
-                                DBConnection.InsertProduct(carniceria.ProductsOutOfStock[i]);
-
-                                DBConnection.DeleteProduct(carniceria.ProductsOutOfStock[i].ID, "ProductsOutOfStock");
-                                carniceria.ProductsOutOfStock.RemoveAt(i);
+                                carniceria.CurrentSeller.AlertStockIncreasePOOS(i);
                                 flagBreak = true;
                                 break;
                             }

@@ -24,7 +24,9 @@ namespace TrabajoPracticoPrimerParcial
         Carniceria carniceria;
         int indexItemSelected;
         private System.Windows.Forms.Timer timer;
-        private Task t1;
+     
+
+
         //          Constructor
 
         /// <summary>
@@ -49,6 +51,8 @@ namespace TrabajoPracticoPrimerParcial
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
 
+            carniceria.CurrentSeller.StockIncreasedPOOS += carniceria.StockExpansionPOOS;
+            carniceria.CurrentSeller.StockIncreased += carniceria.StockExpansion;
         }
 
 
@@ -69,24 +73,42 @@ namespace TrabajoPracticoPrimerParcial
                     Invoke((MethodInvoker)delegate
                     {
                         UpdateLVCart(); 
-                        UpdateProductsGrid(carniceria.Products);
+                        UpdateProductsGrid(carniceria.Products);  //Probado mas, funciona
+                    });                                           //  Borrar comentario
+                });
+            }
+            if (carniceria.ChangeQuantityClients())
+            {
+                Task.Run(() =>
+                {
+                    Invoke((MethodInvoker)delegate          //Probado mas, funciona
+                    {                                       //  Borrar comentario
+                        UpdateLVClients();
                     });
                 });
-                //UpdateLVCart();
-                //UpdateProductsGrid(carniceria.Products);
             }
-                if (carniceria.ChangeQuantityClients())
+            if (carniceria.ChangesInStock())
+            {
+                Task.Run(() =>
                 {
-                    UpdateLVClients();
-                }
-                if (carniceria.ChangesInStock())
+                    Invoke((MethodInvoker)delegate
+                    {
+                        UpdateProductsGrid(carniceria.Products);    //Probado mas, funciona 
+                    });                                             //  Borrar comentario
+                });
+            }
+            if (EnableBtnAddNewCut())
+            {
+                Task.Run(() => 
                 {
-                    UpdateProductsGrid(carniceria.Products);
-                }
-                if (EnableBtnAddNewCut())
-                {
-                    btnAddCut.Enabled = true;
-                }
+                    Invoke((MethodInvoker)delegate
+                    {
+                        btnAddCut.Enabled = true;           //  Probado mas, cuando puse lo del color me tiro un error que no recuerdo
+                        btnAddCut.BackColor = Color.Green;  //  Borrar comentario
+                    });
+                });
+                
+            }
         }
 
         /// <summary>
@@ -249,8 +271,7 @@ namespace TrabajoPracticoPrimerParcial
                 {
                     if (carniceria.Products[count].Name == carniceria.Cart[indexItemSelected].Name)
                     {
-                        carniceria.Products[count].Stock++;
-                        DBConnection.UpdateStock(carniceria.Products[count].ID, 1, "+");
+                        carniceria.CurrentSeller.AlertStockIncrease(count); 
                     }
                     else
                     {
@@ -258,14 +279,7 @@ namespace TrabajoPracticoPrimerParcial
                         {
                             if (carniceria.ProductsOutOfStock[i].Name == carniceria.Cart[indexItemSelected].Name)
                             {
-                                carniceria.ProductsOutOfStock[i].Stock++;
-                                DBConnection.UpdateStock(carniceria.ProductsOutOfStock[i].ID, 1, "+");
-
-                                carniceria.Products.Add(carniceria.ProductsOutOfStock[i]);
-                                DBConnection.InsertProduct(carniceria.ProductsOutOfStock[i]);
-
-                                DBConnection.DeleteProduct(carniceria.ProductsOutOfStock[i].ID, "ProductsOutOfStock");
-                                carniceria.ProductsOutOfStock.RemoveAt(i);
+                                carniceria.CurrentSeller.AlertStockIncreasePOOS(i);
                                 flagBreak = true;
                                 break;
                             }

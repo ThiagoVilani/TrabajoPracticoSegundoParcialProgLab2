@@ -47,8 +47,23 @@ namespace BibliotecaDeClases
                     }
                 }
 
+        public void StockExpansionPOOS(int index)
+        {
+            this.ProductsOutOfStock[index].Stock++;
+            DBConnection.UpdateStock(this.ProductsOutOfStock[index].ID, 1, "+");
 
-        public Task task;
+            this.Products.Add(this.ProductsOutOfStock[index]);
+            DBConnection.InsertProduct(this.ProductsOutOfStock[index]);
+
+            DBConnection.DeleteProduct(this.ProductsOutOfStock[index].ID, "ProductsOutOfStock");
+            this.ProductsOutOfStock.RemoveAt(index);
+        }
+
+        public void StockExpansion(int index)
+        {
+            this.Products[index].Stock++;
+            DBConnection.UpdateStock(this.Products[index].ID, 1, "+");
+        }
 
 
         // Constructor
@@ -70,19 +85,6 @@ namespace BibliotecaDeClases
             CurrentQuantityClients = Clients.Count();
             task.Wait();
             currentQuantProductsOOS = productsOutOfStock.Count();
-
-            //originalClientsList = new List<Client>(DBConnection.ExtractClients()); esta
-            //foreach (Client client in originalClientsList) esta
-            //{
-            //    clients.Enqueue(client);
-            //}
-            //products = new List<Product>(DBConnection.ExtractProducts()); esta
-            //productsOutOfStock = new List<Product>(DBConnection.ExtractProducts("ProductsOutOfStock")); esta
-            //CurrentQuantityOfProductsInCart = 0;
-            //CurrentQuantityClients = Clients.Count();
-            //currentQuantProductsOOS = 0;
-
-
         }
 
 

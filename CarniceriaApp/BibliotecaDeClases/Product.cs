@@ -11,7 +11,8 @@ namespace BibliotecaDeClases
     /// </summary>
     public class Product
     {
-        public int ID { get; set; }
+        private static int IDCount = 1000;
+        public int ID { get; private set; }
         public double Price { get; set; }
         public string Name { get; set; }
         public double Stock { get; set; }
@@ -30,6 +31,8 @@ namespace BibliotecaDeClases
             this.Price = price;
             this.Stock = stock;
             this.Details = details;
+            IDCount++;
+            this.ID = IDCount;
         }
 
         public Product(string name, double price, double stock, string details,int ID) :this(name,price,stock,details) 
