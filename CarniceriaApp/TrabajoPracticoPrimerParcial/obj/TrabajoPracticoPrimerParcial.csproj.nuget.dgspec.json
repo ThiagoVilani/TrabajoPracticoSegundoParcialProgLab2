@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj": {}
+    "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
+    "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
+        "projectUniqueName": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
         "projectName": "BibliotecaDeClases",
-        "projectPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
+        "projectPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
         "packagesPath": "C:\\Users\\vilan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\obj\\",
+        "outputPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vilan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -61,18 +61,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj": {
+    "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
+        "projectUniqueName": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
         "projectName": "TrabajoPracticoPrimerParcial",
-        "projectPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
+        "projectPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
         "packagesPath": "C:\\Users\\vilan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\obj\\",
+        "outputPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vilan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -89,8 +89,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
-                "projectPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj"
+              "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
+                "projectPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj"
               }
             }
           }
@@ -123,7 +123,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
