@@ -493,11 +493,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
+      "projectUniqueName": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
       "projectName": "TrabajoPracticoPrimerParcial",
-      "projectPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
+      "projectPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
       "packagesPath": "C:\\Users\\vilan\\.nuget\\packages\\",
-      "outputPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\obj\\",
+      "outputPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vilan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -514,8 +514,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
-              "projectPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj"
+            "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
+              "projectPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj"
             }
           }
         }
@@ -548,7 +548,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -50,7 +50,6 @@ namespace TrabajoPracticoPrimerParcial
                     {
                         if (!isClient)
                         {
-                            carniceria.clientsDBC.DeleteUser(carniceria.Clients.Peek());  //  STANLEY
                             carniceria.Clients.Dequeue();
                         }
                         Receipt receipt = new Receipt(carniceria.Cart,

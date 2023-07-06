@@ -19,6 +19,8 @@ namespace TrabajoPracticoPrimerParcial
             //DBConnection.meterclientes(clientDBC);
             //DBConnection.metervendedores(sellerDBC);
             this.carniceria = carniceria;
+
+            ToFiles.SaveListOfProducts(carniceria.Products);
         }
 
 
@@ -73,6 +75,7 @@ namespace TrabajoPracticoPrimerParcial
             }
         }
 
+
         /// <summary>
         /// AutoCompletado para prueba
         /// </summary>
@@ -81,8 +84,8 @@ namespace TrabajoPracticoPrimerParcial
         private void ACS_Click(object sender, EventArgs e)
         {
             Sounds.PlayClickSound3();
-            txtbMail.Text = "pipo@gmail.com";
-            txtbPassword.Text = "pipo123";
+            txtbMail.Text = "mario@gmail.com";
+            txtbPassword.Text = "mario123";
         }
 
 

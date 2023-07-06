@@ -161,19 +161,5 @@ namespace BibliotecaDeClases
             catch { throw; }
             finally { connection.Close(); }
         }
-
-
-        public void DeleteUser(Client client)
-        {
-            InsertUser(client);//Revisar si el nombre de la tabla es el mismo
-            try
-            {
-                Open();
-                command.CommandText = $"DELETE FROM Clients WHERE ID = {client.ID}";
-                command.ExecuteNonQuery();
-            }
-            catch { throw; }
-            finally { connection.Close(); }
-        }
     }
 }
