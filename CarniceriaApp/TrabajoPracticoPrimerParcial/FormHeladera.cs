@@ -40,8 +40,8 @@ namespace TrabajoPracticoPrimerParcial
             InitializeComponent();
 
             this.carniceria = carniceria;
-            this.sellerDBC = sellerDBC;
-            this.clientDBC = clientDBC;
+            this.sellerDBC = new SellersDBConnection();
+            this.clientDBC = new ClientsDBConnection();
             AddRow(carniceria.Products);
             ConfigureListView();
             AddRowClients();
@@ -63,6 +63,7 @@ namespace TrabajoPracticoPrimerParcial
 
         ///////////////// EVENTOS \\\\\\\\\\\\\\\\\
 
+
         /// <summary>
         /// Se encarga de actualizar la vista del carrito cuando pasa un segundo
         /// </summary>
@@ -72,34 +73,20 @@ namespace TrabajoPracticoPrimerParcial
         {
             if (carniceria.ChangeQuantityProducts())
             {
-                Task.Run(() =>
-                {
-                    Invoke((MethodInvoker)delegate
-                    {
-                        UpdateLVCart(); 
-                        UpdateProductsGrid(carniceria.Products);  //Probado mas, funciona
-                    });                                           //  Borrar comentario
-                });
+                
+                UpdateLVCart(); 
+                UpdateProductsGrid(carniceria.Products);  
             }
             if (carniceria.ChangeQuantityClients())
             {
-                Task.Run(() =>
-                {
-                    Invoke((MethodInvoker)delegate          //Probado mas, funciona
-                    {                                       //  Borrar comentario
-                        UpdateLVClients();
-                    });
-                });
+                UpdateLVClients();
             }
+
+            
             if (carniceria.ChangesInStock())
             {
-                Task.Run(() =>
-                {
-                    Invoke((MethodInvoker)delegate
-                    {
-                        UpdateProductsGrid(carniceria.Products);    //Probado mas, funciona 
-                    });                                             //  Borrar comentario
-                });
+                UpdateProductsGrid(carniceria.Products);    
+                
             }
             if (EnableBtnAddNewCut())
             {
@@ -107,11 +94,10 @@ namespace TrabajoPracticoPrimerParcial
                 {
                     Invoke((MethodInvoker)delegate
                     {
-                        btnAddCut.Enabled = true;           //  Probado mas, cuando puse lo del color me tiro un error que no recuerdo
-                        btnAddCut.BackColor = Color.Green;  //  Borrar comentario
+                        btnAddCut.Enabled = true;           
+                        btnAddCut.BackColor = Color.Green;  
                     });
                 });
-                
             }
         }
 

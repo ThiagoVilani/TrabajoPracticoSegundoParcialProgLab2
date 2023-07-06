@@ -41,6 +41,8 @@ namespace BibliotecaDeClases
             this.ID = id;
         }
 
+
+        //DELEGADO
         public delegate void StockExpansionPOOS(int index); //  POOS: Producto out of Stock
         public event StockExpansionPOOS StockIncreasedPOOS;
 
@@ -52,6 +54,7 @@ namespace BibliotecaDeClases
             }
         }
 
+        //DELEGADO
         public delegate void StockExpansion(int index);
         public event StockExpansion StockIncreased;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,15 +80,14 @@ namespace BibliotecaDeClases
             this.sellersDBC = new SellersDBConnection();
             originalClientsList = new List<Client>(clientsDBC.ExtractList());
             products = new List<Product>(CarniceriaDBConnection.ExtractProducts());
-            Task task = new Task(() => productsOutOfStock = new List<Product>(CarniceriaDBConnection.ExtractProducts("ProductsOutOfStock")));
-            task.Start();
+            productsOutOfStock = new List<Product>(CarniceriaDBConnection.ExtractProducts("ProductsOutOfStock"));
+            receiptList = new List<Receipt>(CarniceriaDBConnection.ExtractReceiptsList(sellersDBC,clientsDBC));
             foreach (Client client in originalClientsList)
             {
                 clients.Enqueue(client);
             }
             CurrentQuantityOfProductsInCart = 0;
             CurrentQuantityClients = Clients.Count();
-            task.Wait();
             currentQuantProductsOOS = productsOutOfStock.Count();
         }
 

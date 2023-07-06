@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace BibliotecaDeClases
 {
     public class Receipt
     {
+        [XmlIgnore]
         public int ID { get; private set; }
         public string PaymentMethod { get; }
         public Seller Seller { get; }
@@ -19,7 +21,7 @@ namespace BibliotecaDeClases
         public double Total { get; }
 
 
-
+        public Receipt() { }
         public Receipt(List<Product> productsList,double subTotal,double total,Seller seller,Client client,string paymentMethod) 
         {
             foreach(Product product in productsList)

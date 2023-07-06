@@ -32,6 +32,7 @@
             btnRefrigerator = new Button();
             btnStock = new Button();
             lblMenu = new Label();
+            btnProductsToTxt = new Button();
             SuspendLayout();
             // 
             // btnRefrigerator
@@ -68,6 +69,17 @@
             lblMenu.TabIndex = 2;
             lblMenu.Text = "Menu";
             // 
+            // btnProductsToTxt
+            // 
+            btnProductsToTxt.BackColor = Color.AntiqueWhite;
+            btnProductsToTxt.Location = new Point(435, 437);
+            btnProductsToTxt.Name = "btnProductsToTxt";
+            btnProductsToTxt.Size = new Size(228, 56);
+            btnProductsToTxt.TabIndex = 3;
+            btnProductsToTxt.Text = "Descargar listado de Productos";
+            btnProductsToTxt.UseVisualStyleBackColor = false;
+            btnProductsToTxt.Click += btnProductsToTxt_Click;
+            // 
             // FormSellerMenu
             // 
             AutoScaleDimensions = new SizeF(11F, 19F);
@@ -75,6 +87,7 @@
             BackgroundImage = Properties.Resources.Sin_título_1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1149, 577);
+            Controls.Add(btnProductsToTxt);
             Controls.Add(lblMenu);
             Controls.Add(btnStock);
             Controls.Add(btnRefrigerator);
@@ -93,5 +106,6 @@
         private Button btnRefrigerator;
         private Button btnStock;
         private Label lblMenu;
+        private Button btnProductsToTxt;
     }
 }

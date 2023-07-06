@@ -19,8 +19,6 @@ namespace TrabajoPracticoPrimerParcial
             //DBConnection.meterclientes(clientDBC);
             //DBConnection.metervendedores(sellerDBC);
             this.carniceria = carniceria;
-
-            ToFiles.SaveListOfProducts(carniceria.Products);
         }
 
 
@@ -31,6 +29,12 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="e"></param>
         private void btnVendedor_Click(object sender, EventArgs e)
         {
+            Task.Run(() =>
+            {
+                btnVendedor.BackColor = Color.Green;
+                Thread.Sleep(1500);
+                btnVendedor.BackColor = Color.AntiqueWhite;
+            });
             Sounds.PlayClickSound3();
             if(carniceria.sellersDBC.ValidateCredentials(txtbMail.Text.ToLower(),txtbPassword.Text))
             {
@@ -54,6 +58,12 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="e"></param>
         private void btnCliente_Click(object sender, EventArgs e)
         {
+            Task.Run(() =>
+            {
+                btnCliente.BackColor = Color.Green;
+                Thread.Sleep(1500);
+                btnCliente.BackColor = Color.AntiqueWhite;
+            });
             Sounds.PlayClickSound3();
             if(carniceria.clientsDBC.ValidateCredentials(txtbMail.Text.ToLower(),txtbPassword.Text))
             {
@@ -109,6 +119,7 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="e"></param>
         private void pbMostrarPass_Click(object sender, EventArgs e)
         {
+
             Sounds.PlayClickSound3();
             pbMostrarPass.Visible = false;
             pbOcultarPass.Visible = true;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace BibliotecaDeClases
 {
@@ -12,11 +13,17 @@ namespace BibliotecaDeClases
     public class Product
     {
         private static int IDCount = 1000;
+
+        [XmlIgnore]
         public int ID { get; private set; }
         public double Price { get; set; }
         public string Name { get; set; }
         public double Stock { get; set; }
         public string Details { get; set; }
+
+
+
+        public Product() { }
 
         /// <summary>
         /// Se encarga de cargar el nombre, precio, stock y detalles del producto
