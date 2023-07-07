@@ -493,11 +493,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
+      "projectUniqueName": "C:\\ELIMINAR\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
       "projectName": "TrabajoPracticoPrimerParcial",
-      "projectPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
+      "projectPath": "C:\\ELIMINAR\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\TrabajoPracticoPrimerParcial.csproj",
       "packagesPath": "C:\\Users\\vilan\\.nuget\\packages\\",
-      "outputPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\obj\\",
+      "outputPath": "C:\\ELIMINAR\\CarniceriaApp\\TrabajoPracticoPrimerParcial\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vilan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -514,8 +514,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
-              "projectPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj"
+            "C:\\ELIMINAR\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
+              "projectPath": "C:\\ELIMINAR\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj"
             }
           }
         }

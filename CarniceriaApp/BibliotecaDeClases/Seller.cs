@@ -46,6 +46,7 @@ namespace BibliotecaDeClases
         public delegate void StockExpansionPOOS(int index); //  POOS: Producto out of Stock
         public event StockExpansionPOOS StockIncreasedPOOS;
 
+        //EVENTO
         public void AlertStockIncreasePOOS(int index)
         {
             if (StockIncreasedPOOS != null)
@@ -58,6 +59,8 @@ namespace BibliotecaDeClases
         public delegate void StockExpansion(int index);
         public event StockExpansion StockIncreased;
 
+
+        //EVENTO
         public void AlertStockIncrease(int index)
         {
             if (StockIncreased!= null)
@@ -119,6 +122,8 @@ namespace BibliotecaDeClases
             CarniceriaDBConnection.UpdateStock(products[index].ID, stock, "+");
         }
 
+       
+
         public void AddToCart(int productIndex, int quantity,List<Product> products,List<Product> cart)
         {
             if (productIndex < 0)
@@ -163,17 +168,13 @@ namespace BibliotecaDeClases
             {
                 if (!isClient)
                 {
-                    ClientsDBConnection.UpdateClientMoney(Clients.Peek().ID, (int)total);
-                    Clients.Peek().CantidadDinero -= total; // STANLEY
+                    Clients.Peek().CantidadDinero -= total; 
                     if (Clients.Count() > 0)
                     {
                         client = Clients.Peek();
                     }
-                    else
-                    {
-                        this.QuantityOfSales++;
-                        SellersDBConnection.UpdateSales(this.ID, this.QuantityOfSales);
-                    }
+                    this.QuantityOfSales++;
+                    SellersDBConnection.UpdateSales(this.ID, this.QuantityOfSales);
                 }
                 return true;
             }

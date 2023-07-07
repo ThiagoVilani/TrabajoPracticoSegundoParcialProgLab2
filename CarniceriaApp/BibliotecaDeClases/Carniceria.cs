@@ -7,16 +7,6 @@ using System.Threading.Tasks;
 
 namespace BibliotecaDeClases
 {
-
-
-    ///////////////////////////       Palabra clave para eliminar las listas     \\\\\\\\\\\\\\\\\\\\\\\\\\
-    ///////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    ///////////////////////////////                 STANLEY                     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-    ////////////////////////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-
-
-
     /// <summary>
     /// Se encarga de administrar los clientes, los vendedores, los productos y sus precios, stock etc.
     /// </summary>
@@ -50,6 +40,8 @@ namespace BibliotecaDeClases
                     }
                 }
 
+
+        //EVENTO
         public void StockExpansionPOOS(int index)
         {
             this.ProductsOutOfStock[index].Stock++;
@@ -62,6 +54,8 @@ namespace BibliotecaDeClases
             this.ProductsOutOfStock.RemoveAt(index);
         }
 
+
+        //EVENTO
         public void StockExpansion(int index)
         {
             this.Products[index].Stock++;

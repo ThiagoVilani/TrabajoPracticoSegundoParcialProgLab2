@@ -62,9 +62,10 @@ namespace TrabajoPracticoPrimerParcial
                             lblRemainingMoney.Text = "Dinero restante: 0";
                         }
                     });
-                });                
+                });
             }
         }
+
 
         /// <summary>
         /// Añade al carrito la cantidad solicitada del producto seleccionado
@@ -82,8 +83,15 @@ namespace TrabajoPracticoPrimerParcial
                 prodcutIndex = dgvProductsGrid.CurrentRow.Index;
                 if (lblSelectedProduct.Text != "Sin seleccion")
                 {
+                    Task.Run(() =>
+                    {
+                        btnAddToCart.BackColor = Color.Green;
+                        Thread.Sleep(1000);
+                        btnAddToCart.BackColor = Color.LightCoral;
+                    });
                     lblErrorSelection.Visible = false;
                     carniceria.CurrentSeller.AddToCart(prodcutIndex, quantity, carniceria.Products, carniceria.Cart);
+                    carniceria.CurrentClient.CalculateRemainingMoney(carniceria.Products[prodcutIndex],quantity);
                     UpdateProductsGrid(carniceria.Products);
                 }
                 else
@@ -108,6 +116,12 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
+            Task.Run(() =>
+            {
+                btnCleanFilters.BackColor = Color.Green;
+                Thread.Sleep(1000);
+                btnCleanFilters.BackColor = Color.LightCoral;
+            });
             Sounds.PlayClickSound3();
             UpdateProductsGrid(carniceria.Products);
             //foreach (DataGridViewRow row in dgvProductsGrid.Rows)
@@ -137,6 +151,12 @@ namespace TrabajoPracticoPrimerParcial
             }
             if (indexItemSelected != -1)
             {
+                Task.Run(() =>
+                {
+                    btnDeleteProduct.BackColor = Color.Green;
+                    Thread.Sleep(1000);
+                    btnDeleteProduct.BackColor = Color.LightCoral;
+                });
                 lblErrorCart.Visible = false;
                 int pcount = carniceria.Products.Count();
                 int count = 0;
@@ -183,6 +203,12 @@ namespace TrabajoPracticoPrimerParcial
             Sounds.PlayClickSound3();
             if (txtbFilter.Text != "")
             {
+                Task.Run(() =>
+                {
+                    btnFilter.BackColor = Color.Green;
+                    Thread.Sleep(1000);
+                    btnFilter.BackColor = Color.LightCoral;
+                });
                 foreach (DataGridViewRow row in dgvProductsGrid.Rows)
                 {
                     foreach (DataGridViewCell cell in row.Cells)
@@ -230,7 +256,7 @@ namespace TrabajoPracticoPrimerParcial
                 if (carniceria.Products[i].Stock == 0)
                 {
                     carniceria.NewProductOutOfStock(i);
-                    
+
                     carniceria.Products.RemoveAt(i);
                     UpdateProductsGrid(carniceria.Products);
                     break;
@@ -294,6 +320,11 @@ namespace TrabajoPracticoPrimerParcial
             {
                 lblTotal.Text = "Total: 0";
             }
+        }
+
+        private void lblRemainingMoney_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

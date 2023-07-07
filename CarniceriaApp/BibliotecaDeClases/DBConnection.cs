@@ -22,11 +22,15 @@ namespace BibliotecaDeClases
         public static void meterproducto()
         {
             List<Product> lista = new List<Product>();
-            lista.Add(new Product("Asado", 1230, 12, "es asado"));
-            lista.Add(new Product("Chorizo", 1530, 10, "es chorizo"));
-            lista.Add(new Product("Molleja", 1110, 11, "es molleja"));
-            lista.Add(new Product("bondiola", 3230, 5, "es bondiola"));
-            lista.Add(new Product("roast beed", 1630, 22, "es rb"));
+            lista.Add(new Product("Asado", 1230, 12, "Es un corte largo, plano y sin hueso del vientre"));
+            lista.Add(new Product("Chorizo", 1530, 10, "Los chorizos tendrán una consistencia firme y compacta al tacto, serán de forma cilíndrica, más o menos regular, pudiendo tener diversas presentaciones"));
+            lista.Add(new Product("Molleja", 1110, 11, "Se compone de una parte alargada, la garganta (no comestible), y de una parte redonda y muy sabrosa: la nuez"));
+            lista.Add(new Product("Bondiola", 3230, 5, "Es tierna y jugosa gracias a la grasa que posee entre sus músculos"));
+            lista.Add(new Product("Roast beef", 1630, 22, "Es un corte con abundante grasa en su veta, bien marmoleado"));
+            lista.Add(new Product("paleta", 1260, 12, "Se obtiene del omoplato y el humero"));
+            lista.Add(new Product("Nalga", 1000, 15, "Es la pieza más voluminosa y magra, y no tiene hueso"));
+            lista.Add(new Product("Matabre", 1500, 10, "Es un corte largo, plano y sin hueso del vientre de la vaca"));
+            lista.Add(new Product("Falda", 800, 12, "Combina carne magra, betas de grasa y fibra, tierno, jugosos y delicioso sabor, sin llegar a ser un corte duro."));
             foreach (Product p in lista)
             {
                 CarniceriaDBConnection.InsertProduct(p);

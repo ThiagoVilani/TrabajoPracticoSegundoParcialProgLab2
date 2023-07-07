@@ -44,6 +44,7 @@ namespace TrabajoPracticoPrimerParcial
                 if (b && amount > 0)
                 {
                     carniceria.CurrentClient.CantidadDinero = amount;
+                    ClientsDBConnection.UpdateClientMoney(carniceria.CurrentClient.ID, amount);
                     FormPurchaseScreen purchaseScreen = new FormPurchaseScreen(carniceria);
                     purchaseScreen.Show();
                     this.Hide();

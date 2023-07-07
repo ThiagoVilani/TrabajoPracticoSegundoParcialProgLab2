@@ -147,6 +147,7 @@
             // 
             // btnAddToCart
             // 
+            btnAddToCart.BackColor = Color.LightCoral;
             btnAddToCart.FlatStyle = FlatStyle.Flat;
             btnAddToCart.Font = new Font("Sitka Heading", 11.249999F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnAddToCart.Location = new Point(5, 74);
@@ -155,7 +156,7 @@
             btnAddToCart.Size = new Size(262, 32);
             btnAddToCart.TabIndex = 23;
             btnAddToCart.Text = "Añadir al Carrito";
-            btnAddToCart.UseVisualStyleBackColor = true;
+            btnAddToCart.UseVisualStyleBackColor = false;
             btnAddToCart.Click += btnAddToCart_Click_1;
             // 
             // lblSelectQuantity
@@ -222,7 +223,7 @@
             // 
             // btnDeleteProduct
             // 
-            btnDeleteProduct.BackColor = Color.FromArgb(192, 192, 255);
+            btnDeleteProduct.BackColor = Color.LightCoral;
             btnDeleteProduct.FlatStyle = FlatStyle.Flat;
             btnDeleteProduct.Font = new Font("Sitka Subheading", 11.249999F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnDeleteProduct.Location = new Point(946, 605);
@@ -246,11 +247,11 @@
             // 
             // btnFilter
             // 
-            btnFilter.BackColor = Color.Firebrick;
+            btnFilter.BackColor = Color.LightCoral;
             btnFilter.Cursor = Cursors.Hand;
             btnFilter.FlatStyle = FlatStyle.Flat;
             btnFilter.Font = new Font("Sitka Small", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            btnFilter.ForeColor = Color.White;
+            btnFilter.ForeColor = SystemColors.ButtonHighlight;
             btnFilter.Location = new Point(240, 16);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(66, 27);
@@ -261,7 +262,7 @@
             // 
             // btnCleanFilters
             // 
-            btnCleanFilters.BackColor = Color.FromArgb(192, 192, 255);
+            btnCleanFilters.BackColor = Color.LightCoral;
             btnCleanFilters.Cursor = Cursors.Hand;
             btnCleanFilters.FlatStyle = FlatStyle.Flat;
             btnCleanFilters.Font = new Font("Sitka Small", 9F, FontStyle.Italic, GraphicsUnit.Point);
@@ -298,6 +299,7 @@
             lblRemainingMoney.Size = new Size(144, 23);
             lblRemainingMoney.TabIndex = 31;
             lblRemainingMoney.Text = "Dinero restante: ";
+            lblRemainingMoney.Click += lblRemainingMoney_Click;
             // 
             // lblErrorSelection
             // 

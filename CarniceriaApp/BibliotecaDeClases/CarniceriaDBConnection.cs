@@ -118,6 +118,7 @@ namespace BibliotecaDeClases
             {
                 Open();
                 command.CommandText = $"SELECT TOP 1 * FROM {listType} ORDER BY ID DESC";
+                
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
                     while (dataReader.Read())
@@ -214,7 +215,10 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"UPDATE Products SET [precio kilo] = {newPrice} WHERE ID = {id}";
+                command.Parameters.Clear();
+                command.CommandText = $"UPDATE Products SET [precio kilo] = @NewPrice WHERE ID = @ID";
+                command.Parameters.AddWithValue("@ID", id);
+                command.Parameters.AddWithValue("@NewPrice", newPrice);
                 command.ExecuteNonQuery();
             }
             catch { throw; }
@@ -226,7 +230,10 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"UPDATE Products SET [stock kilos] = [stock kilos] {mathOperator} {quantity} WHERE ID = {id}";
+                command.Parameters.Clear();
+                command.CommandText = $"UPDATE Products SET [stock kilos] = [stock kilos] {mathOperator} @Quantity WHERE ID = @ID";
+                command.Parameters.AddWithValue("@Quantity", quantity);
+                command.Parameters.AddWithValue("@ID", id);
                 command.ExecuteNonQuery();
             }
             catch { throw; }

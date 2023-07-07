@@ -155,7 +155,7 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"UPDATE Clients SET [cantidad dinero] = [cantidad dinero] - {total} WHERE ID = {clientID}";
+                command.CommandText = $"UPDATE Clients SET [cantidad dinero] = {total} WHERE ID = {clientID}";
                 command.ExecuteNonQuery();
             }
             catch { throw; }

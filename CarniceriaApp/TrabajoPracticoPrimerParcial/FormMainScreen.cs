@@ -15,9 +15,6 @@ namespace TrabajoPracticoPrimerParcial
             InitializeComponent();
             this.clientDBC = new ClientsDBConnection();
             this.sellerDBC = new SellersDBConnection();  
-            //DBConnection.meterproducto();
-            //DBConnection.meterclientes(clientDBC);
-            //DBConnection.metervendedores(sellerDBC);
             this.carniceria = carniceria;
         }
 
@@ -67,7 +64,7 @@ namespace TrabajoPracticoPrimerParcial
             Sounds.PlayClickSound3();
             if(carniceria.clientsDBC.ValidateCredentials(txtbMail.Text.ToLower(),txtbPassword.Text))
             {
-                carniceria.CurrentSeller = this.sellerDBC.ExtractUser(5);   // Cambiar el ID
+                carniceria.CurrentSeller = this.sellerDBC.ExtractUser(1001);   // Cambiar el ID
                 carniceria.CurrentClient = this.clientDBC.ExtractUser(txtbMail.Text.ToLower(), txtbPassword.Text);
                 if(carniceria.CurrentClient == null)
                 {
@@ -107,8 +104,8 @@ namespace TrabajoPracticoPrimerParcial
         private void ACC_Click(object sender, EventArgs e)
         {
             Sounds.PlayClickSound3();
-            txtbMail.Text = "mario@gmail.com";
-            txtbPassword.Text = "mario123";
+            txtbMail.Text = "alfred@gmail.com";
+            txtbPassword.Text = "alfred123";
         }
 
 

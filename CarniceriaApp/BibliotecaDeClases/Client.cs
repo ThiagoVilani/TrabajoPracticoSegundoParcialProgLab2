@@ -59,5 +59,10 @@
                    $"Dinero para comprar: {this.CantidadDinero}\n" +
                    $"Pedido: {this.Pedido}";
         }
+
+        public void CalculateRemainingMoney(Product product, int quantity)
+        {
+            this.CantidadDinero -= (product.Price * quantity);
+        }
     }
 }

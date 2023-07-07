@@ -475,11 +475,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
+      "projectUniqueName": "C:\\ELIMINAR\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
       "projectName": "BibliotecaDeClases",
-      "projectPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
+      "projectPath": "C:\\ELIMINAR\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
       "packagesPath": "C:\\Users\\vilan\\.nuget\\packages\\",
-      "outputPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\obj\\",
+      "outputPath": "C:\\ELIMINAR\\CarniceriaApp\\BibliotecaDeClases\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vilan\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -184,7 +184,7 @@
             // listClients
             // 
             listClients.Anchor = AnchorStyles.None;
-            listClients.BackColor = Color.FromArgb(192, 192, 255);
+            listClients.BackColor = Color.LightCoral;
             listClients.Columns.AddRange(new ColumnHeader[] { cName, cOrder });
             listClients.FullRowSelect = true;
             listClients.Location = new Point(1216, 57);
@@ -265,7 +265,7 @@
             // btnChangeStock
             // 
             btnChangeStock.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            btnChangeStock.BackColor = Color.FromArgb(192, 192, 255);
+            btnChangeStock.BackColor = Color.LightCoral;
             btnChangeStock.ForeColor = Color.Black;
             btnChangeStock.Location = new Point(311, 23);
             btnChangeStock.Margin = new Padding(3, 2, 3, 2);
@@ -279,7 +279,7 @@
             // btnAddCut
             // 
             btnAddCut.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            btnAddCut.BackColor = Color.FromArgb(192, 192, 255);
+            btnAddCut.BackColor = Color.LightCoral;
             btnAddCut.Enabled = false;
             btnAddCut.ForeColor = Color.Black;
             btnAddCut.Location = new Point(526, 44);
@@ -294,7 +294,7 @@
             // lvCart
             // 
             lvCart.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            lvCart.BackColor = Color.FromArgb(192, 192, 255);
+            lvCart.BackColor = Color.LightCoral;
             lvCart.Columns.AddRange(new ColumnHeader[] { cCutName, cPrice });
             lvCart.Location = new Point(840, 57);
             lvCart.Margin = new Padding(3, 2, 3, 2);
@@ -339,7 +339,7 @@
             // 
             // btnAddToCart
             // 
-            btnAddToCart.BackColor = Color.FromArgb(192, 192, 255);
+            btnAddToCart.BackColor = Color.LightCoral;
             btnAddToCart.BackgroundImageLayout = ImageLayout.None;
             btnAddToCart.Cursor = Cursors.Hand;
             btnAddToCart.FlatAppearance.MouseDownBackColor = Color.Red;
@@ -368,7 +368,7 @@
             // btnChangePrice
             // 
             btnChangePrice.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            btnChangePrice.BackColor = Color.FromArgb(192, 192, 255);
+            btnChangePrice.BackColor = Color.LightCoral;
             btnChangePrice.ForeColor = Color.Black;
             btnChangePrice.Location = new Point(311, 62);
             btnChangePrice.Margin = new Padding(3, 2, 3, 2);
@@ -513,7 +513,7 @@
             // btnDeleteProduct
             // 
             btnDeleteProduct.Anchor = AnchorStyles.None;
-            btnDeleteProduct.BackColor = Color.FromArgb(192, 192, 255);
+            btnDeleteProduct.BackColor = Color.LightCoral;
             btnDeleteProduct.FlatStyle = FlatStyle.Flat;
             btnDeleteProduct.Font = new Font("Sitka Subheading", 11.249999F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             btnDeleteProduct.Location = new Point(923, 368);
