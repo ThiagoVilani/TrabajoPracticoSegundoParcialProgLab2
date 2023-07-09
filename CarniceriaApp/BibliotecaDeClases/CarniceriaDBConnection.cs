@@ -30,6 +30,14 @@ namespace BibliotecaDeClases
             }
         }
 
+        public static void Close()
+        {
+            if(connection.State != ConnectionState.Closed)
+            {
+                connection.Close();
+            }
+        }
+
 
         public static List<Receipt> ExtractReceiptsList(SellersDBConnection sellerDBC, ClientsDBConnection clientDBC)
         {
@@ -53,7 +61,7 @@ namespace BibliotecaDeClases
                 return receipts;
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -107,7 +115,7 @@ namespace BibliotecaDeClases
                 }
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -133,7 +141,7 @@ namespace BibliotecaDeClases
                 return product;
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -163,7 +171,7 @@ namespace BibliotecaDeClases
             }
             finally
             {
-                connection.Close();
+                Close();
             }
         }
 
@@ -185,7 +193,7 @@ namespace BibliotecaDeClases
                 command.ExecuteNonQuery();
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -199,14 +207,8 @@ namespace BibliotecaDeClases
 
                 command.ExecuteNonQuery();
             }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                connection.Close();
-            }
+            catch {  throw; }
+            finally { Close(); }
         }
 
 
@@ -222,7 +224,7 @@ namespace BibliotecaDeClases
                 command.ExecuteNonQuery();
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
         public static void UpdateStock(int id, int quantity, string mathOperator)
@@ -237,7 +239,7 @@ namespace BibliotecaDeClases
                 command.ExecuteNonQuery();
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -250,7 +252,7 @@ namespace BibliotecaDeClases
                 command.ExecuteNonQuery();
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
     }
 }

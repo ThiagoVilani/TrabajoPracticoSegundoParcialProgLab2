@@ -43,7 +43,7 @@ namespace BibliotecaDeClases
 
 
         //DELEGADO
-        public delegate void StockExpansionPOOS(int index); //  POOS: Producto out of Stock
+        public delegate void StockExpansionPOOS(int index); //  POOS: Products out of Stock
         public event StockExpansionPOOS StockIncreasedPOOS;
 
         //EVENTO
@@ -51,7 +51,7 @@ namespace BibliotecaDeClases
         {
             if (StockIncreasedPOOS != null)
             {
-                StockIncreasedPOOS(index);
+                StockIncreasedPOOS.Invoke(index); //Con el Invoke()
             }
         }
 

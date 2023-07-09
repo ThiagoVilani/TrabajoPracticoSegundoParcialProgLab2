@@ -54,11 +54,10 @@ namespace TrabajoPracticoPrimerParcial
                 btnProductsToTxt.BackColor = Color.AntiqueWhite;
             });
             Sounds.PlayClickSound2();
-            ToFiles.SaveProductsList(carniceria.Products);
-            MessageBox.Show("Se creo el archivo .txt");
-            MessageBox.Show(ToFiles.ReadProductsList());
-            ToFiles.XmlSerializeReceipts(carniceria.ReceiptList);
-            MessageBox.Show(ToFiles.XmlDeserializeReceipts());
+            ToFiles.XmlSerializeProducts(carniceria.Products);
+            ToFiles.JsonSerializeProducts(carniceria.Products);
+            MessageBox.Show(ToFiles.XmlDeserializeProducts());
+            MessageBox.Show(ToFiles.JsonDeserializeProducts()); 
         }
     }
 }
