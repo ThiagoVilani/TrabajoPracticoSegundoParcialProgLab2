@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w9wx86ZcReAYwYG/sM/J7MQw5VRaboQ1YyB/wPDXqOK77NvLBkGEu/m+nzeY5+oiLsWkgkw8jb/HQiiL9BcYfw==",
+  "dgSpecHash": "uBWZKVp19YgTnnLA3t8vnSlV6xAXbuoSNBV9DY43gEeg8KrMa4LLpEyoZBmEJ6Ye7x3OofuMXQBKhrSP+hWnhg==",
   "success": true,
-  "projectFilePath": "C:\\ELIMINAR\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
+  "projectFilePath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vilan\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\vilan\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

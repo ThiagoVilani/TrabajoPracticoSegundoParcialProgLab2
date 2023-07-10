@@ -20,7 +20,7 @@ namespace BibliotecaDeClases
         static string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-        public static void SaveProductsList(List<Product> list)
+        public static void SaveReceiptsList(List<Receipt> list)
         {
             try
             {
@@ -32,37 +32,26 @@ namespace BibliotecaDeClases
                 using (streamWriter = new StreamWriter(path + @"/Receipts.txt"))
                 {
                     streamWriter.WriteLine($"Fecha: {DateTime.Now.ToString()}");
-                    foreach (Product product in list)
+                    foreach (Receipt receipt in list)
                     {
-                        streamWriter.WriteLine($"{product.Name} | Stock a la fecha: {product.Stock} | Precio a la fecha: {product.Price}");
+                        streamWriter.WriteLine($"Numero de Factura: {receipt.ID}\n" +
+                                               $"Metodo de Pago: {receipt.PaymentMethod}\n" +
+                                               $"Vendedor: {receipt.Seller.Name}\n" +
+                                               $"Cliente: {receipt.Client.Name}\n\n" +
+                                               $"Productos:\n");
+                        foreach(Product product in receipt.ProductsList)
+                        {
+                            streamWriter.WriteLine($"{product.Name} | ${product.Price}\n");
+                        }
+                        streamWriter.WriteLine($"SubTotal: {receipt.SubTotal}" +
+                                               $"\nTotal: {receipt.Total}");
                     }
                 }
-
             }
             catch { throw new Exception($"Error al intentar guardar el archivo"); }
         }
 
-
-        public static string ReadProductsList()
-        {
-            try
-            {
-                string productsList = string.Empty;
-                if (Directory.Exists(path))
-                {
-                    using (streamReader = new StreamReader(path + @"/Receipts.txt"))
-                    {
-                        productsList = streamReader.ReadToEnd();
-
-                    }
-                }
-                return productsList;
-            }
-            catch
-            {
-                throw new Exception($"Error al intentar leer el archivo");
-            }
-        }
+        
 
 
         public static void XmlSerializeProducts(List<Product> products)
@@ -94,7 +83,7 @@ namespace BibliotecaDeClases
         {
             List<Product> products = new List<Product>();
             string productsList= string.Empty;
-            productsList+="Lista de Productos\n";
+            productsList+="Lista de Productos deserializados desde XML\n";
 
             try
             {
@@ -138,7 +127,7 @@ namespace BibliotecaDeClases
         {
             List<Product> products = new List<Product>();
             string productsList = string.Empty;
-            productsList += "Lista de productos deserializada en JSON\n";
+            productsList += "Lista de productos deserializados desde JSON\n";
 
             try
             {

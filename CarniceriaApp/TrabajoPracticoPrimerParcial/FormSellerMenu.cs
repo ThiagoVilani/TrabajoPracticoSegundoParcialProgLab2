@@ -54,6 +54,7 @@ namespace TrabajoPracticoPrimerParcial
                 btnProductsToTxt.BackColor = Color.AntiqueWhite;
             });
             Sounds.PlayClickSound2();
+            ToFiles.SaveReceiptsList(carniceria.ReceiptList);
             ToFiles.XmlSerializeProducts(carniceria.Products);
             ToFiles.JsonSerializeProducts(carniceria.Products);
             MessageBox.Show(ToFiles.XmlDeserializeProducts());

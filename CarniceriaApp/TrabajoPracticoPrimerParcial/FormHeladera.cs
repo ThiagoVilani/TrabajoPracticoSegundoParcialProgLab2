@@ -523,9 +523,9 @@ namespace TrabajoPracticoPrimerParcial
             double stock = double.Parse(txtbNewCutStock.Text);
             if (price > 0 && stock > 0)
             {
-                CarniceriaDBConnection.InsertProduct(new Product(name, price, stock, details));
-                
-                carniceria.Products.Add(CarniceriaDBConnection.ExtractLastProduct());
+                Product product = new Product(name, price, stock, details);
+                CarniceriaDBConnection.InsertProduct(product);
+                carniceria.Products.Add(product);
                 UpdateAll();
             }
         }

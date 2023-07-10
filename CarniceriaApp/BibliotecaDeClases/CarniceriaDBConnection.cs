@@ -46,6 +46,7 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
+                command.Parameters.Clear();
                 command.CommandText = "SELECT * FROM Receipts";
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
@@ -119,39 +120,22 @@ namespace BibliotecaDeClases
         }
 
 
-        public static Product ExtractLastProduct(string listType = "Products")
-        {
-            Product product = null;
-            try
-            {
-                Open();
-                command.CommandText = $"SELECT TOP 1 * FROM {listType} ORDER BY ID DESC";
-                
-                using (SqlDataReader dataReader = command.ExecuteReader())
-                {
-                    while (dataReader.Read())
-                    {
-                        product = new Product(dataReader["nombre"].ToString(),
-                                                Convert.ToDouble(dataReader["precio kilo"]),
-                                                Convert.ToDouble(dataReader["stock kilos"]),
-                                                dataReader["detalles"].ToString(),
-                                                (int)dataReader["ID"]);
-                    }
-                }
-                return product;
-            }
-            catch { throw; }
-            finally { Close(); }
-        }
 
-
-        public static List<Product> ExtractProducts(string listType = "Products")
+        public static List<Product> ExtractProducts(bool isOutOfStock=false)
         {
             List<Product> products = new List<Product>();
             try
             {
                 Open();
-                command.CommandText = $"SELECT * FROM {listType}";
+                command.Parameters.Clear();
+                if (isOutOfStock)
+                {
+                    command.CommandText = "SELECT * FROM ProductsOutOfStock";
+                }
+                else
+                {
+                    command.CommandText = "SELECT * FROM Products";
+                }
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
                     while (dataReader.Read())
@@ -165,14 +149,8 @@ namespace BibliotecaDeClases
                 }
                 return products;
             }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                Close();
-            }
+            catch { throw; }
+            finally { Close(); }
         }
 
 
@@ -188,8 +166,16 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
+                command.Parameters.Clear();
                 command.CommandText = $"INSERT INTO Receipts ([metodo pago],[ID vendedor],[ID cliente],productos,precios,subtotal,total)" +
-                    $"VALUES ('{receipt.PaymentMethod}','{receipt.Seller.ID}','{receipt.Client.ID}','{products}','{prices}','{receipt.SubTotal}','{(int)receipt.Total}')";
+                    $"VALUES (@PaymentMethod,@Seller,@Client,@Products,@Prices,@Subtotal,@Total)";
+                command.Parameters.AddWithValue("@PaymentMethod", receipt.PaymentMethod);
+                command.Parameters.AddWithValue("@Seller", receipt.Seller.ID);
+                command.Parameters.AddWithValue("@Client", receipt.Client.ID);
+                command.Parameters.AddWithValue("@Products", products);
+                command.Parameters.AddWithValue("@Prices", prices);
+                command.Parameters.AddWithValue("@Subtotal", receipt.SubTotal);
+                command.Parameters.AddWithValue("@Total", receipt.Total);
                 command.ExecuteNonQuery();
             }
             catch { throw; }
@@ -197,14 +183,27 @@ namespace BibliotecaDeClases
         }
 
 
-        public static void InsertProduct(Product product, string listType = "Products")
+        public static void InsertProduct(Product product, bool isOutOfStock=false)
         {
             try
             {
                 Open();
-                command.CommandText = $"INSERT INTO {listType} (ID,nombre,[precio kilo],[stock kilos], detalles) " +
-                                      $"VALUES ('{product.ID}','{product.Name}','{(int)product.Price}','{(int)product.Stock}','{product.Details}')";
-
+                command.Parameters.Clear();
+                if (isOutOfStock)
+                {
+                    command.CommandText = $"INSERT INTO ProductsOutOfStock (ID,nombre,[precio kilo],[stock kilos], detalles) " +
+                                      $"VALUES (@ID, @Name, @Price,@Stock,@Details)";
+                }
+                else
+                {
+                    command.CommandText = $"INSERT INTO Products (ID,nombre,[precio kilo],[stock kilos], detalles) " +
+                                          $"VALUES (@ID, @Name, @Price,@Stock,@Details)";
+                }
+                command.Parameters.AddWithValue("@ID", product.ID);
+                command.Parameters.AddWithValue("@Name", product.Name);
+                command.Parameters.AddWithValue("@Price", product.Price);
+                command.Parameters.AddWithValue("@Stock", product.Stock);
+                command.Parameters.AddWithValue("@Details", product.Details);
                 command.ExecuteNonQuery();
             }
             catch {  throw; }
@@ -227,13 +226,20 @@ namespace BibliotecaDeClases
             finally { Close(); }
         }
 
-        public static void UpdateStock(int id, int quantity, string mathOperator)
+        public static void UpdateStock(int id, int quantity, bool isSubstraction=false)
         {
             try
             {
                 Open();
                 command.Parameters.Clear();
-                command.CommandText = $"UPDATE Products SET [stock kilos] = [stock kilos] {mathOperator} @Quantity WHERE ID = @ID";
+                if (isSubstraction)
+                {
+                    command.CommandText = $"UPDATE Products SET [stock kilos] = [stock kilos] - @Quantity WHERE ID = @ID";
+                }
+                else
+                {
+                    command.CommandText = $"UPDATE Products SET [stock kilos] = [stock kilos] + @Quantity WHERE ID = @ID";
+                }
                 command.Parameters.AddWithValue("@Quantity", quantity);
                 command.Parameters.AddWithValue("@ID", id);
                 command.ExecuteNonQuery();
@@ -243,12 +249,21 @@ namespace BibliotecaDeClases
         }
 
 
-        public static void DeleteProduct(int id, string listType = "Products")
+        public static void DeleteProduct(int id, bool isOutOfStock=false)
         {
             try
             {
                 Open();
-                command.CommandText = $"DELETE FROM {listType} WHERE ID = {id}";
+                command.Parameters.Clear();
+                if (isOutOfStock)
+                {
+                    command.CommandText = $"DELETE FROM ProductsOutOfStock WHERE @ID";
+                }
+                else
+                {
+                    command.CommandText = $"DELETE FROM Products WHERE @ID";
+                }
+                command.Parameters.AddWithValue("@ID", id);
                 command.ExecuteNonQuery();
             }
             catch { throw; }
