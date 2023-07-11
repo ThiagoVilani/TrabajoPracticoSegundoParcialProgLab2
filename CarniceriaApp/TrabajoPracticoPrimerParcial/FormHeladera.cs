@@ -339,6 +339,12 @@ namespace TrabajoPracticoPrimerParcial
             formAddStock.ShowDialog();
         }
 
+
+        private void btnDelProductFromFridge_Click(object sender, EventArgs e)
+        {
+
+        }
+
         /////////////////// FUNCIONES \\\\\\\\\\\\\\\\\\\\
         /// <summary>
         /// Agrega una nueva fila a la tabla de productos, poniendo cada dato en la columna adecuada

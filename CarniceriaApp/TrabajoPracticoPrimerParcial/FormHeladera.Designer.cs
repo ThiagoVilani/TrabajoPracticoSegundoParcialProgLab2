@@ -77,6 +77,7 @@
             lblErrorEmptyCart = new Label();
             lblErrorNumber = new Label();
             lblErrorBack = new Label();
+            btnDelProductFromFridge = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProductsGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudKilos).BeginInit();
             gbAddNewCut.SuspendLayout();
@@ -569,7 +570,7 @@
             groupBox1.Controls.Add(gbModifyProduct);
             groupBox1.Controls.Add(gbAddNewCut);
             groupBox1.ForeColor = Color.White;
-            groupBox1.Location = new Point(104, 516);
+            groupBox1.Location = new Point(104, 543);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(1377, 153);
             groupBox1.TabIndex = 34;
@@ -635,7 +636,7 @@
             lblErrorNumber.BackColor = Color.Transparent;
             lblErrorNumber.Font = new Font("SimSun", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblErrorNumber.ForeColor = Color.Red;
-            lblErrorNumber.Location = new Point(209, 672);
+            lblErrorNumber.Location = new Point(203, 699);
             lblErrorNumber.Name = "lblErrorNumber";
             lblErrorNumber.Size = new Size(625, 19);
             lblErrorNumber.TabIndex = 39;
@@ -655,6 +656,24 @@
             lblErrorBack.Text = "El carrito todavia tiene productos!";
             lblErrorBack.Visible = false;
             // 
+            // btnDelProductFromFridge
+            // 
+            btnDelProductFromFridge.BackColor = Color.LightCoral;
+            btnDelProductFromFridge.BackgroundImageLayout = ImageLayout.None;
+            btnDelProductFromFridge.Cursor = Cursors.Hand;
+            btnDelProductFromFridge.FlatAppearance.MouseDownBackColor = Color.Red;
+            btnDelProductFromFridge.FlatStyle = FlatStyle.Flat;
+            btnDelProductFromFridge.Font = new Font("Sitka Heading", 13F, FontStyle.Italic, GraphicsUnit.Point);
+            btnDelProductFromFridge.ForeColor = Color.Black;
+            btnDelProductFromFridge.Location = new Point(593, 497);
+            btnDelProductFromFridge.Margin = new Padding(3, 2, 3, 2);
+            btnDelProductFromFridge.Name = "btnDelProductFromFridge";
+            btnDelProductFromFridge.Size = new Size(193, 41);
+            btnDelProductFromFridge.TabIndex = 41;
+            btnDelProductFromFridge.Text = "Eliminar Producto";
+            btnDelProductFromFridge.UseVisualStyleBackColor = false;
+            btnDelProductFromFridge.Click += btnDelProductFromFridge_Click;
+            // 
             // FormHeladera
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -663,6 +682,7 @@
             BackgroundImage = Properties.Resources.Sin_título_1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1561, 796);
+            Controls.Add(btnDelProductFromFridge);
             Controls.Add(lblErrorBack);
             Controls.Add(lblErrorNumber);
             Controls.Add(lblErrorEmptyCart);
@@ -753,5 +773,6 @@
         private Label lblErrorEmptyCart;
         private Label lblErrorNumber;
         private Label lblErrorBack;
+        private Button btnDelProductFromFridge;
     }
 }
