@@ -45,8 +45,6 @@ namespace BibliotecaDeClases
         public void StockExpansionPOOS(int index)
         {
             this.ProductsOutOfStock[index].Stock++;
-            CarniceriaDBConnection.UpdateStock(this.ProductsOutOfStock[index].ID, 1);
-
             this.Products.Add(this.ProductsOutOfStock[index]);
             CarniceriaDBConnection.InsertProduct(this.ProductsOutOfStock[index]);
 

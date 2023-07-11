@@ -24,7 +24,8 @@ namespace TrabajoPracticoPrimerParcial
         Carniceria carniceria;
         SellersDBConnection sellerDBC;
         ClientsDBConnection clientDBC;
-        int indexItemSelected;
+        int indexItemSelectedFromCart;
+        int indexItemSelectedFromFridge;
         private System.Windows.Forms.Timer timer;
 
 
@@ -49,7 +50,8 @@ namespace TrabajoPracticoPrimerParcial
             {
                 carniceria.CurrentClient = carniceria.Clients.Peek();
             }
-            indexItemSelected = -1;
+            indexItemSelectedFromCart = -1;
+            indexItemSelectedFromFridge = -1;
             timer = new System.Windows.Forms.Timer();
             timer.Interval = 1000;
             timer.Tick += new EventHandler(timer_Tick);
@@ -264,11 +266,11 @@ namespace TrabajoPracticoPrimerParcial
             {
                 try
                 {
-                    indexItemSelected = item.Index;
+                    indexItemSelectedFromCart = item.Index;
                 }
                 catch (System.ArgumentOutOfRangeException) { }
             }
-            if (indexItemSelected != -1)
+            if (indexItemSelectedFromCart != -1)
             {
                 Task.Run(() =>
                 {
@@ -283,7 +285,7 @@ namespace TrabajoPracticoPrimerParcial
                 lblErrorDeleteProduct.Visible = false;
                 while (!flagBreak && count < pcount)
                 {
-                    if (carniceria.Products[count].Name == carniceria.Cart[indexItemSelected].Name)
+                    if (carniceria.Products[count].Name == carniceria.Cart[indexItemSelectedFromCart].Name)
                     {
                         carniceria.CurrentSeller.AlertStockIncrease(count);
                     }
@@ -291,7 +293,7 @@ namespace TrabajoPracticoPrimerParcial
                     {
                         for (int i = 0; i < carniceria.ProductsOutOfStock.Count(); i++)
                         {
-                            if (carniceria.ProductsOutOfStock[i].Name == carniceria.Cart[indexItemSelected].Name)
+                            if (carniceria.ProductsOutOfStock[i].Name == carniceria.Cart[indexItemSelectedFromCart].Name)
                             {
                                 carniceria.CurrentSeller.AlertStockIncreasePOOS(i);
                                 flagBreak = true;
@@ -301,8 +303,8 @@ namespace TrabajoPracticoPrimerParcial
                     }
                     count++;
                 }
-                carniceria.Cart.RemoveAt(indexItemSelected);
-                indexItemSelected = -1;
+                carniceria.Cart.RemoveAt(indexItemSelectedFromCart);
+                indexItemSelectedFromCart = -1;
             }
             else
             {
@@ -333,16 +335,15 @@ namespace TrabajoPracticoPrimerParcial
             frh.ShowDialog();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            FormAddStock formAddStock = new FormAddStock(carniceria);
-            formAddStock.ShowDialog();
-        }
-
-
+       
         private void btnDelProductFromFridge_Click(object sender, EventArgs e)
         {
-
+            Sounds.PlayClickSound3();
+            indexItemSelectedFromFridge = dgvProductsGrid.CurrentRow.Index;
+            CarniceriaDBConnection.DeleteProduct(carniceria.Products[indexItemSelectedFromFridge].ID);
+            carniceria.Products.RemoveAt(indexItemSelectedFromFridge);
+            indexItemSelectedFromFridge = -1;
+            UpdateProductsGrid(carniceria.Products);
         }
 
         /////////////////// FUNCIONES \\\\\\\\\\\\\\\\\\\\
@@ -352,6 +353,7 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="productsList">Recibe la lista de los producto de la carniceria</param>
         private void UpdateProductsGrid(List<Product> productsList)
         {
+            lblSelectedProduct.Text = "Sin seleccion";
             dgvProductsGrid.Rows.Clear();
             AddRow(productsList);
             IsOutOfStock();

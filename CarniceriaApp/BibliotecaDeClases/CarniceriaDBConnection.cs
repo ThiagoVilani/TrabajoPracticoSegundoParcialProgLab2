@@ -251,18 +251,20 @@ namespace BibliotecaDeClases
 
         public static void DeleteProduct(int id, bool isOutOfStock=false)
         {
+            string strCommand;
+            if (isOutOfStock)
+            {
+                strCommand = $"DELETE FROM ProductsOutOfStock WHERE ID = @ID";
+            }
+            else
+            {
+                strCommand = $"DELETE FROM Products WHERE ID = @ID";
+            }
             try
             {
                 Open();
                 command.Parameters.Clear();
-                if (isOutOfStock)
-                {
-                    command.CommandText = $"DELETE FROM ProductsOutOfStock WHERE @ID";
-                }
-                else
-                {
-                    command.CommandText = $"DELETE FROM Products WHERE @ID";
-                }
+                command.CommandText = strCommand;
                 command.Parameters.AddWithValue("@ID", id);
                 command.ExecuteNonQuery();
             }

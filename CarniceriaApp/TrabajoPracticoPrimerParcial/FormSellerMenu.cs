@@ -35,12 +35,6 @@ namespace TrabajoPracticoPrimerParcial
 
         private void btnStock_Click(object sender, EventArgs e)
         {
-            Task.Run(() =>
-            {
-                btnStock.BackColor = Color.Green;
-                Thread.Sleep(1500);
-                btnStock.BackColor = Color.AntiqueWhite;
-            });
             FormAddStock formAddStock = new FormAddStock(carniceria);
             formAddStock.ShowDialog();
         }

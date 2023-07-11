@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {}
+    "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {}
   },
   "projects": {
-    "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
+    "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
+        "projectUniqueName": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
         "projectName": "BibliotecaDeClases",
-        "projectPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
+        "projectPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\BibliotecaDeClases.csproj",
         "packagesPath": "C:\\Users\\vilan\\.nuget\\packages\\",
-        "outputPath": "C:\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\obj\\",
+        "outputPath": "C:\\Users\\vilan\\OneDrive\\Escritorio\\TrabajoPracticoSegundoParcialProgLab2\\CarniceriaApp\\BibliotecaDeClases\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vilan\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }
