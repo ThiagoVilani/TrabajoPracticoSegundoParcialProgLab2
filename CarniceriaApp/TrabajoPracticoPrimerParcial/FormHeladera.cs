@@ -14,24 +14,19 @@ using BibliotecaDeClases;
 
 namespace TrabajoPracticoPrimerParcial
 {
-
     /// <summary>
     /// Representa a la heladera de la carniceria, se ven todos los cortes y se puede modificarlos
     /// </summary>
     public partial class FormHeladera : Form
     {
-        //          Atributos y Propiedades
+        //          Atributos y Propiedades//////////////////
         Carniceria carniceria;
-        SellersDBConnection sellerDBC;
-        ClientsDBConnection clientDBC;
         int indexItemSelectedFromCart;
         int indexItemSelectedFromFridge;
-        private System.Windows.Forms.Timer timer;
+        bool stopClock;
 
 
-
-        //          Constructor
-
+        //          Constructor///////////////////
         /// <summary>
         /// Agrega los productos a la tabla de productos, configura los elementos de del form e inicia unn reloj para actualizaciones
         /// </summary>
@@ -41,8 +36,6 @@ namespace TrabajoPracticoPrimerParcial
             InitializeComponent();
 
             this.carniceria = carniceria;
-            this.sellerDBC = new SellersDBConnection();
-            this.clientDBC = new ClientsDBConnection();
             AddRow(carniceria.Products);
             ConfigureListView();
             AddRowClients();
@@ -52,56 +45,21 @@ namespace TrabajoPracticoPrimerParcial
             }
             indexItemSelectedFromCart = -1;
             indexItemSelectedFromFridge = -1;
-            timer = new System.Windows.Forms.Timer();
-            timer.Interval = 1000;
-            timer.Tick += new EventHandler(timer_Tick);
-            timer.Start();
+            stopClock = false;
 
             carniceria.CurrentSeller.StockIncreasedPOOS += carniceria.StockExpansionPOOS;
-            carniceria.CurrentSeller.StockIncreased += carniceria.StockExpansion;
+            carniceria.CurrentSeller.StockIncreased += carniceria.StockExpansion;   
         }
 
 
 
         ///////////////// EVENTOS \\\\\\\\\\\\\\\\\
-
-
-        /// <summary>
-        /// Se encarga de actualizar la vista del carrito cuando pasa un segundo
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void timer_Tick(object sender, EventArgs e)
+        private void FormHeladera_Load(object sender, EventArgs e)
         {
-            if (carniceria.ChangeQuantityProducts())
-            {
-
-                UpdateLVCart();
-                UpdateProductsGrid(carniceria.Products);
-            }
-            if (carniceria.ChangeQuantityClients())
-            {
-                UpdateLVClients();
-            }
-
-
-            if (carniceria.ChangesInStock())
-            {
-                UpdateProductsGrid(carniceria.Products);
-
-            }
-            if (EnableBtnAddNewCut())
-            {
-                Task.Run(() =>
-                {
-                    Invoke((MethodInvoker)delegate
-                    {
-                        btnAddCut.Enabled = true;
-                        btnAddCut.BackColor = Color.Green;
-                    });
-                });
-            }
+            StartClock();
+            StartUpdates();
         }
+
 
         /// <summary>
         /// Se encarga de tomar los datos del objeto seleccionado en la tabla de productos
@@ -121,6 +79,7 @@ namespace TrabajoPracticoPrimerParcial
             { nudKilos.Maximum = Convert.ToDecimal(carniceria.Products[dgvProductsGrid.CurrentRow.Index].Stock); }
             catch { }
         }
+
 
         /// <summary>
         /// Se encarga de sacar al cliente recien atendido, actualiza, deriba al form de metodos de pago
@@ -156,12 +115,6 @@ namespace TrabajoPracticoPrimerParcial
             int prodcutIndex = dgvProductsGrid.CurrentRow.Index;
             if (lblSelectedProduct.Text != "Sin seleccion" && quantity != 0)
             {
-                Task.Run(() =>
-                {
-                    btnAddToCart.BackColor = Color.Green;
-                    Thread.Sleep(1500);
-                    btnAddToCart.BackColor = Color.LightCoral;
-                });
                 carniceria.CurrentSeller.AddToCart(prodcutIndex, quantity, carniceria.Products, carniceria.Cart);
                 lblTotal.Text = $"Total:  {carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart)}";
                 UpdateAll();
@@ -182,6 +135,7 @@ namespace TrabajoPracticoPrimerParcial
             }
         }
 
+
         /// <summary>
         /// Llama a otro metodo para añadir stock de un producto y actualiza el form
         /// </summary>
@@ -192,12 +146,6 @@ namespace TrabajoPracticoPrimerParcial
             Sounds.PlayClickSound3();
             if (lblSelectedProduct.Text != "Sin seleccion")
             {
-                Task.Run(() =>
-                {
-                    btnChangeStock.BackColor = Color.Green;
-                    Thread.Sleep(1000);
-                    btnChangeStock.BackColor = Color.LightCoral;
-                });
                 lblErrorNumber.Visible = false;
                 AddStock();
             }
@@ -209,6 +157,7 @@ namespace TrabajoPracticoPrimerParcial
             txtbChangeStock.Text = "";
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -219,12 +168,6 @@ namespace TrabajoPracticoPrimerParcial
             Sounds.PlayClickSound3();
             if (lblSelectedProduct.Text != "Sin seleccion")
             {
-                Task.Run(() =>
-                {
-                    btnChangePrice.BackColor = Color.Green;
-                    Thread.Sleep(1000);
-                    btnChangePrice.BackColor = Color.LightCoral;
-                });
                 lblErrorNumber.Visible = false;
                 ChangePrice();
                 UpdateAll();
@@ -236,6 +179,7 @@ namespace TrabajoPracticoPrimerParcial
             }
 
         }
+
 
         /// <summary>
         /// Llama al metodo que agrega un nuevo corte a la carniceria y actualiza el form
@@ -254,6 +198,7 @@ namespace TrabajoPracticoPrimerParcial
             UpdateAll();
         }
 
+
         /// <summary>
         /// Elimina el producto seleccionado del carrito y lo devuelve al stock
         /// </summary>
@@ -261,6 +206,7 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="e"></param>
         private void btnDeleteProduct_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(Thread.CurrentThread.ManagedThreadId.ToString());
             Sounds.PlayClickSound3();
             foreach (ListViewItem item in lvCart.SelectedItems)
             {
@@ -272,12 +218,6 @@ namespace TrabajoPracticoPrimerParcial
             }
             if (indexItemSelectedFromCart != -1)
             {
-                Task.Run(() =>
-                {
-                    btnDeleteProduct.BackColor = Color.Green;
-                    Thread.Sleep(1000);
-                    btnDeleteProduct.BackColor = Color.LightCoral;
-                });
                 int pcount = carniceria.Products.Count();
                 int count = 0;
                 bool flagBreak = false;
@@ -329,13 +269,14 @@ namespace TrabajoPracticoPrimerParcial
             }
         }
 
+
         private void btnReceiptsList_Click(object sender, EventArgs e)
         {
             FormReceiptHistory frh = new FormReceiptHistory(carniceria);
             frh.ShowDialog();
         }
 
-       
+
         private void btnDelProductFromFridge_Click(object sender, EventArgs e)
         {
             Sounds.PlayClickSound3();
@@ -345,6 +286,9 @@ namespace TrabajoPracticoPrimerParcial
             indexItemSelectedFromFridge = -1;
             UpdateProductsGrid(carniceria.Products);
         }
+
+
+
 
         /////////////////// FUNCIONES \\\\\\\\\\\\\\\\\\\\
         /// <summary>
@@ -359,6 +303,7 @@ namespace TrabajoPracticoPrimerParcial
             IsOutOfStock();
         }
 
+
         /// <summary>
         /// Actualiza la listview del carrito
         /// </summary>
@@ -367,6 +312,7 @@ namespace TrabajoPracticoPrimerParcial
             lvCart.Items.Clear();
             AddRowProducts();
         }
+
 
         /// <summary>
         /// Agrega una nueva fila a la DataGridView de los productos, estableciendo el valor de cada columna
@@ -405,6 +351,8 @@ namespace TrabajoPracticoPrimerParcial
             lvCart.Columns[0].Width = lvCart.ClientSize.Width / 2;
             lvCart.Columns[1].Width = lvCart.ClientSize.Width / 2;
         }
+
+
         /// <summary>
         /// Agrega una fila mas a la tabla de clientes colocando los datos en la columna correspondiente
         /// </summary>
@@ -418,15 +366,12 @@ namespace TrabajoPracticoPrimerParcial
             }
         }
 
+
         /// <summary>
         /// Se encarga de actualizar todos los elementos del form
         /// </summary>
         private void UpdateAll()
         {
-            //if (carniceria.Clients.Count > 0)
-            //{
-            //    carniceria.CurrentClient = carniceria.Clients.Peek();
-            //}
             UpdateLVClients();
             listClients.Items.Clear();
             UpdateProductsGrid(carniceria.Products);
@@ -436,6 +381,7 @@ namespace TrabajoPracticoPrimerParcial
             nudKilos.Value = 0;
         }
 
+
         /// <summary>
         /// Actualiza la listView de los clientes
         /// </summary>
@@ -444,6 +390,7 @@ namespace TrabajoPracticoPrimerParcial
             listClients.Items.Clear();
             AddRowClients();
         }
+
 
         /// <summary>
         /// Agrega una fila a la tabla de los productos en el carrito
@@ -457,6 +404,7 @@ namespace TrabajoPracticoPrimerParcial
                 lvCart.Items.Add(item);
             }
         }
+
 
         /// <summary>
         /// Agrega la cantidad de stock solicitada al producto indicado
@@ -480,6 +428,7 @@ namespace TrabajoPracticoPrimerParcial
             }
         }
 
+
         /// <summary>
         /// Cambia el preico al producto seleccionado
         /// </summary>
@@ -502,6 +451,7 @@ namespace TrabajoPracticoPrimerParcial
                 lblErrorNumber.Visible = true;
             }
         }
+
 
         private bool EnableBtnAddNewCut()
         {
@@ -538,6 +488,7 @@ namespace TrabajoPracticoPrimerParcial
             }
         }
 
+
         /// <summary>
         /// Comprueba que producto esta sin stock y lo vuelve invisble ante el usuario
         /// </summary>
@@ -552,6 +503,73 @@ namespace TrabajoPracticoPrimerParcial
                     UpdateProductsGrid(carniceria.Products);
                     break;
                 }
+            }
+        }
+
+
+        private void StartUpdates()
+        {
+            Task.Run(() => { Updates(); });
+        }
+
+
+        private void StartClock()
+        {
+            Task.Run(() => { ChangeTime(); });
+        }
+
+
+        private void ChangeTime()
+        {
+            while (!stopClock)
+            {
+                //MessageBox.Show(Thread.CurrentThread.ManagedThreadId.ToString());
+                Invoke((MethodInvoker)delegate
+                {
+                    lblClock.Text = $"Fecha: {DateTime.Now.ToString("dd/MM/yyyy")} | Hora: {DateTime.Now.ToString("HH:mm:ss")}";
+                });
+                Thread.Sleep(10000);
+            }
+        }
+
+
+        /// <summary>
+        /// Se encarga de actualizar la vista del carrito cuando pasa un segundo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Updates()
+        {
+            while (true)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    if (carniceria.ChangeQuantityProducts())
+                    {
+                        UpdateLVCart();
+                        UpdateProductsGrid(carniceria.Products);
+                    }
+                    if (carniceria.ChangeQuantityClients())
+                    {
+                        UpdateLVClients();
+                    }
+                    if (carniceria.ChangesInStock())
+                    {
+                        UpdateProductsGrid(carniceria.Products);
+                    }
+                    if (EnableBtnAddNewCut())
+                    {
+                        Task.Run(() =>
+                        {
+                            Invoke((MethodInvoker)delegate
+                            {
+                                btnAddCut.Enabled = true;
+                                btnAddCut.BackColor = Color.Green;
+                            });
+                        });
+                    }
+                });
+                Thread.Sleep(1000);
             }
         }
     }
