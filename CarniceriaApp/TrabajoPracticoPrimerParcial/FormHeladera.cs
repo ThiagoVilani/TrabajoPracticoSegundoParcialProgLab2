@@ -48,7 +48,7 @@ namespace TrabajoPracticoPrimerParcial
             stopClock = false;
 
             carniceria.CurrentSeller.StockIncreasedPOOS += carniceria.StockExpansionPOOS;
-            carniceria.CurrentSeller.StockIncreased += carniceria.StockExpansion;   
+            carniceria.CurrentSeller.StockIncreased += carniceria.StockExpansion;
         }
 
 
@@ -250,22 +250,6 @@ namespace TrabajoPracticoPrimerParcial
                 lblErrorDeleteProduct.Visible = true;
             }
             lblTotal.Text = $"Total:  {carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart)}";
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Sounds.PlayClickSound();
-            if (carniceria.Cart.Count == 0)
-            {
-                lblErrorBack.Visible = false;
-                FormSellerMenu fsm = new FormSellerMenu(this.carniceria);
-                fsm.Show();
-                this.Close();
-            }
-            else
-            {
-                lblErrorBack.Visible = true;
-            }
         }
 
 
@@ -568,8 +552,29 @@ namespace TrabajoPracticoPrimerParcial
                     });
                     Thread.Sleep(1000);
                 }
-                catch{}
+                catch { }
             }
+        }
+
+        private void btnReplaceStock_Click(object sender, EventArgs e)
+        {
+            FormAddStock formAddStock = new FormAddStock(carniceria);
+            formAddStock.ShowDialog();
+        }
+
+        private void btnCreateFiles_Click(object sender, EventArgs e)
+        {
+            Sounds.PlayClickSound2();
+            ToFiles.SaveReceiptsList(carniceria.ReceiptList);
+            ToFiles.XmlSerializeProducts(carniceria.Products);
+            ToFiles.JsonSerializeProducts(carniceria.Products);
+        }
+
+        private void btnReadFiles_Click(object sender, EventArgs e)
+        {
+            Sounds.PlayClickSound2();
+            MessageBox.Show(ToFiles.XmlDeserializeProducts());
+            MessageBox.Show(ToFiles.JsonDeserializeProducts());
         }
     }
 }

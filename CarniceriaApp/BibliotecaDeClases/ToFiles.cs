@@ -34,7 +34,8 @@ namespace BibliotecaDeClases
                     streamWriter.WriteLine($"Fecha: {DateTime.Now.ToString()}");
                     foreach (Receipt receipt in list)
                     {
-                        streamWriter.WriteLine($"Numero de Factura: {receipt.ID}\n" +
+                        streamWriter.WriteLine("---------------------------\n"+
+                                               $"Numero de Factura: {receipt.ID}\n" +
                                                $"Metodo de Pago: {receipt.PaymentMethod}\n" +
                                                $"Vendedor: {receipt.Seller.Name}\n" +
                                                $"Cliente: {receipt.Client.Name}\n\n" +
@@ -44,7 +45,8 @@ namespace BibliotecaDeClases
                             streamWriter.WriteLine($"{product.Name} | ${product.Price}\n");
                         }
                         streamWriter.WriteLine($"SubTotal: {receipt.SubTotal}" +
-                                               $"\nTotal: {receipt.Total}");
+                                               $"\nTotal: {receipt.Total}\n" +
+                                               $"---------------------------\n");
                     }
                 }
             }
@@ -136,10 +138,7 @@ namespace BibliotecaDeClases
                     products = JsonSerializer.Deserialize<List<Product>>(jsonString);
                 }
             }
-            catch
-            {
-                throw new Exception("Hubo un error al deserializar los productos.");
-            }
+            catch{ }
             foreach (Product product in products)
             {
                 productsList += $"ID: {product.ID}\nPrecio: {product.Price}\nNombre: {product.Name}\nStock: {product.Stock}\nDetalles:{product.Details}\n";

@@ -68,7 +68,6 @@
             label1 = new Label();
             btnDeleteProduct = new Button();
             lblErrorDeleteProduct = new Label();
-            btnBack = new Button();
             btnReceiptsList = new Button();
             groupBox1 = new GroupBox();
             label2 = new Label();
@@ -76,9 +75,11 @@
             lblErrorQuantityEmpty = new Label();
             lblErrorEmptyCart = new Label();
             lblErrorNumber = new Label();
-            lblErrorBack = new Label();
             btnDelProductFromFridge = new Button();
             lblClock = new Label();
+            btnCreateFiles = new Button();
+            btnReplaceStock = new Button();
+            btnReadFiles = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProductsGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)nudKilos).BeginInit();
             gbAddNewCut.SuspendLayout();
@@ -95,12 +96,13 @@
             dgvProductsGrid.BackgroundColor = Color.White;
             dgvProductsGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProductsGrid.Columns.AddRange(new DataGridViewColumn[] { columnaCorte, columnaStock, columnaPrecio, columnaDetalles });
-            dgvProductsGrid.Location = new Point(5, 76);
+            dgvProductsGrid.Location = new Point(4, 57);
+            dgvProductsGrid.Margin = new Padding(3, 2, 3, 2);
             dgvProductsGrid.Name = "dgvProductsGrid";
             dgvProductsGrid.ReadOnly = true;
             dgvProductsGrid.RowHeadersWidth = 51;
             dgvProductsGrid.RowTemplate.Height = 29;
-            dgvProductsGrid.Size = new Size(894, 479);
+            dgvProductsGrid.Size = new Size(782, 359);
             dgvProductsGrid.TabIndex = 0;
             dgvProductsGrid.CellClick += dgvProductsGrid_CellClick;
             // 
@@ -138,18 +140,19 @@
             lblSelectedProduct.BackColor = Color.Transparent;
             lblSelectedProduct.Font = new Font("Sitka Heading", 16.1999989F, FontStyle.Italic, GraphicsUnit.Point);
             lblSelectedProduct.ForeColor = Color.White;
-            lblSelectedProduct.Location = new Point(9, 557);
+            lblSelectedProduct.Location = new Point(8, 418);
             lblSelectedProduct.Name = "lblSelectedProduct";
-            lblSelectedProduct.Size = new Size(155, 39);
+            lblSelectedProduct.Size = new Size(129, 32);
             lblSelectedProduct.TabIndex = 1;
             lblSelectedProduct.Text = "Sin seleccion";
             // 
             // nudKilos
             // 
             nudKilos.BackColor = Color.FromArgb(192, 192, 255);
-            nudKilos.Location = new Point(590, 569);
+            nudKilos.Location = new Point(516, 427);
+            nudKilos.Margin = new Padding(3, 2, 3, 2);
             nudKilos.Name = "nudKilos";
-            nudKilos.Size = new Size(54, 27);
+            nudKilos.Size = new Size(47, 23);
             nudKilos.TabIndex = 2;
             // 
             // lblSelectQuantity
@@ -159,9 +162,9 @@
             lblSelectQuantity.BackColor = Color.Transparent;
             lblSelectQuantity.Font = new Font("Sitka Heading", 16.1999989F, FontStyle.Italic, GraphicsUnit.Point);
             lblSelectQuantity.ForeColor = Color.White;
-            lblSelectQuantity.Location = new Point(415, 564);
+            lblSelectQuantity.Location = new Point(363, 423);
             lblSelectQuantity.Name = "lblSelectQuantity";
-            lblSelectQuantity.Size = new Size(176, 39);
+            lblSelectQuantity.Size = new Size(147, 32);
             lblSelectQuantity.TabIndex = 3;
             lblSelectQuantity.Text = "Cuantos kilos?";
             lblSelectQuantity.TextAlign = ContentAlignment.MiddleCenter;
@@ -172,9 +175,10 @@
             btnSell.BackColor = Color.FromArgb(0, 192, 0);
             btnSell.Font = new Font("Sitka Heading", 16.1999989F, FontStyle.Italic, GraphicsUnit.Point);
             btnSell.ForeColor = Color.Black;
-            btnSell.Location = new Point(1079, 551);
+            btnSell.Location = new Point(944, 413);
+            btnSell.Margin = new Padding(3, 2, 3, 2);
             btnSell.Name = "btnSell";
-            btnSell.Size = new Size(595, 65);
+            btnSell.Size = new Size(521, 49);
             btnSell.TabIndex = 4;
             btnSell.Text = "Finalizar Compra";
             btnSell.UseVisualStyleBackColor = false;
@@ -186,10 +190,11 @@
             listClients.BackColor = Color.LightCoral;
             listClients.Columns.AddRange(new ColumnHeader[] { cName, cOrder });
             listClients.FullRowSelect = true;
-            listClients.Location = new Point(1390, 76);
+            listClients.Location = new Point(1216, 57);
+            listClients.Margin = new Padding(3, 2, 3, 2);
             listClients.MultiSelect = false;
             listClients.Name = "listClients";
-            listClients.Size = new Size(386, 460);
+            listClients.Size = new Size(338, 346);
             listClients.TabIndex = 5;
             listClients.UseCompatibleStateImageBehavior = false;
             listClients.View = View.Details;
@@ -209,9 +214,9 @@
             lblChangeStock.BackColor = Color.Transparent;
             lblChangeStock.Font = new Font("Sitka Heading", 13F, FontStyle.Italic, GraphicsUnit.Point);
             lblChangeStock.ForeColor = Color.White;
-            lblChangeStock.Location = new Point(16, 25);
+            lblChangeStock.Location = new Point(14, 19);
             lblChangeStock.Name = "lblChangeStock";
-            lblChangeStock.Size = new Size(141, 32);
+            lblChangeStock.Size = new Size(117, 26);
             lblChangeStock.TabIndex = 7;
             lblChangeStock.Text = "Agregar Stock";
             // 
@@ -222,9 +227,9 @@
             lblChangePrice.BackColor = Color.Transparent;
             lblChangePrice.Font = new Font("Sitka Heading", 13F, FontStyle.Italic, GraphicsUnit.Point);
             lblChangePrice.ForeColor = Color.White;
-            lblChangePrice.Location = new Point(16, 81);
+            lblChangePrice.Location = new Point(14, 61);
             lblChangePrice.Name = "lblChangePrice";
-            lblChangePrice.Size = new Size(152, 32);
+            lblChangePrice.Size = new Size(125, 26);
             lblChangePrice.TabIndex = 8;
             lblChangePrice.Text = "Cambiar Precio";
             // 
@@ -234,9 +239,9 @@
             lbNameNewCut.AutoSize = true;
             lbNameNewCut.Font = new Font("Sitka Heading", 13F, FontStyle.Italic, GraphicsUnit.Point);
             lbNameNewCut.ForeColor = Color.White;
-            lbNameNewCut.Location = new Point(6, 28);
+            lbNameNewCut.Location = new Point(5, 21);
             lbNameNewCut.Name = "lbNameNewCut";
-            lbNameNewCut.Size = new Size(86, 32);
+            lbNameNewCut.Size = new Size(71, 26);
             lbNameNewCut.TabIndex = 9;
             lbNameNewCut.Text = "Nombre";
             // 
@@ -244,18 +249,20 @@
             // 
             txtbChangeStock.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             txtbChangeStock.BackColor = Color.White;
-            txtbChangeStock.Location = new Point(168, 31);
+            txtbChangeStock.Location = new Point(147, 23);
+            txtbChangeStock.Margin = new Padding(3, 2, 3, 2);
             txtbChangeStock.Name = "txtbChangeStock";
-            txtbChangeStock.Size = new Size(180, 27);
+            txtbChangeStock.Size = new Size(158, 23);
             txtbChangeStock.TabIndex = 10;
             // 
             // txtbNameNewCut
             // 
             txtbNameNewCut.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            txtbNameNewCut.Location = new Point(98, 33);
+            txtbNameNewCut.Location = new Point(86, 25);
+            txtbNameNewCut.Margin = new Padding(3, 2, 3, 2);
             txtbNameNewCut.Name = "txtbNameNewCut";
             txtbNameNewCut.PlaceholderText = "Ingrese el corte";
-            txtbNameNewCut.Size = new Size(180, 27);
+            txtbNameNewCut.Size = new Size(158, 23);
             txtbNameNewCut.TabIndex = 12;
             // 
             // btnChangeStock
@@ -263,9 +270,10 @@
             btnChangeStock.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             btnChangeStock.BackColor = Color.LightCoral;
             btnChangeStock.ForeColor = Color.Black;
-            btnChangeStock.Location = new Point(355, 31);
+            btnChangeStock.Location = new Point(311, 23);
+            btnChangeStock.Margin = new Padding(3, 2, 3, 2);
             btnChangeStock.Name = "btnChangeStock";
-            btnChangeStock.Size = new Size(139, 31);
+            btnChangeStock.Size = new Size(122, 23);
             btnChangeStock.TabIndex = 13;
             btnChangeStock.Text = "Agregar";
             btnChangeStock.UseVisualStyleBackColor = false;
@@ -277,9 +285,10 @@
             btnAddCut.BackColor = Color.LightCoral;
             btnAddCut.Enabled = false;
             btnAddCut.ForeColor = Color.Black;
-            btnAddCut.Location = new Point(601, 59);
+            btnAddCut.Location = new Point(526, 44);
+            btnAddCut.Margin = new Padding(3, 2, 3, 2);
             btnAddCut.Name = "btnAddCut";
-            btnAddCut.Size = new Size(114, 33);
+            btnAddCut.Size = new Size(100, 25);
             btnAddCut.TabIndex = 15;
             btnAddCut.Text = "Agregar";
             btnAddCut.UseVisualStyleBackColor = false;
@@ -290,9 +299,10 @@
             lvCart.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             lvCart.BackColor = Color.LightCoral;
             lvCart.Columns.AddRange(new ColumnHeader[] { cCutName, cPrice });
-            lvCart.Location = new Point(960, 76);
+            lvCart.Location = new Point(840, 57);
+            lvCart.Margin = new Padding(3, 2, 3, 2);
             lvCart.Name = "lvCart";
-            lvCart.Size = new Size(386, 349);
+            lvCart.Size = new Size(338, 263);
             lvCart.TabIndex = 16;
             lvCart.UseCompatibleStateImageBehavior = false;
             lvCart.View = View.Details;
@@ -311,9 +321,9 @@
             lblClientsList.BackColor = Color.Transparent;
             lblClientsList.Font = new Font("Sitka Heading", 16F, FontStyle.Italic, GraphicsUnit.Point);
             lblClientsList.ForeColor = Color.White;
-            lblClientsList.Location = new Point(1390, 15);
+            lblClientsList.Location = new Point(1216, 11);
             lblClientsList.Name = "lblClientsList";
-            lblClientsList.Size = new Size(195, 39);
+            lblClientsList.Size = new Size(160, 32);
             lblClientsList.TabIndex = 17;
             lblClientsList.Text = "Lista de Clientes";
             // 
@@ -324,9 +334,9 @@
             lblCart.BackColor = Color.Transparent;
             lblCart.Font = new Font("Sitka Heading", 16F, FontStyle.Italic, GraphicsUnit.Point);
             lblCart.ForeColor = Color.White;
-            lblCart.Location = new Point(960, 23);
+            lblCart.Location = new Point(840, 17);
             lblCart.Name = "lblCart";
-            lblCart.Size = new Size(96, 39);
+            lblCart.Size = new Size(79, 32);
             lblCart.TabIndex = 18;
             lblCart.Text = "Carrito";
             // 
@@ -339,9 +349,10 @@
             btnAddToCart.FlatStyle = FlatStyle.Flat;
             btnAddToCart.Font = new Font("Sitka Heading", 13F, FontStyle.Italic, GraphicsUnit.Point);
             btnAddToCart.ForeColor = Color.Black;
-            btnAddToCart.Location = new Point(678, 561);
+            btnAddToCart.Location = new Point(593, 421);
+            btnAddToCart.Margin = new Padding(3, 2, 3, 2);
             btnAddToCart.Name = "btnAddToCart";
-            btnAddToCart.Size = new Size(221, 55);
+            btnAddToCart.Size = new Size(193, 41);
             btnAddToCart.TabIndex = 19;
             btnAddToCart.Text = "Añadir al Carrito";
             btnAddToCart.UseVisualStyleBackColor = false;
@@ -351,9 +362,10 @@
             // 
             txtbChangePrice.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             txtbChangePrice.BackColor = Color.White;
-            txtbChangePrice.Location = new Point(166, 85);
+            txtbChangePrice.Location = new Point(145, 64);
+            txtbChangePrice.Margin = new Padding(3, 2, 3, 2);
             txtbChangePrice.Name = "txtbChangePrice";
-            txtbChangePrice.Size = new Size(180, 27);
+            txtbChangePrice.Size = new Size(158, 23);
             txtbChangePrice.TabIndex = 11;
             // 
             // btnChangePrice
@@ -361,9 +373,10 @@
             btnChangePrice.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             btnChangePrice.BackColor = Color.LightCoral;
             btnChangePrice.ForeColor = Color.Black;
-            btnChangePrice.Location = new Point(355, 83);
+            btnChangePrice.Location = new Point(311, 62);
+            btnChangePrice.Margin = new Padding(3, 2, 3, 2);
             btnChangePrice.Name = "btnChangePrice";
-            btnChangePrice.Size = new Size(139, 33);
+            btnChangePrice.Size = new Size(122, 25);
             btnChangePrice.TabIndex = 14;
             btnChangePrice.Text = "Cambiar";
             btnChangePrice.UseVisualStyleBackColor = false;
@@ -382,9 +395,11 @@
             gbAddNewCut.Controls.Add(txtbNameNewCut);
             gbAddNewCut.Controls.Add(btnAddCut);
             gbAddNewCut.ForeColor = Color.White;
-            gbAddNewCut.Location = new Point(810, 29);
+            gbAddNewCut.Location = new Point(709, 22);
+            gbAddNewCut.Margin = new Padding(3, 2, 3, 2);
             gbAddNewCut.Name = "gbAddNewCut";
-            gbAddNewCut.Size = new Size(721, 144);
+            gbAddNewCut.Padding = new Padding(3, 2, 3, 2);
+            gbAddNewCut.Size = new Size(631, 108);
             gbAddNewCut.TabIndex = 20;
             gbAddNewCut.TabStop = false;
             gbAddNewCut.Text = "Agregar un nuevo corte";
@@ -392,10 +407,11 @@
             // txtbNewCutDetails
             // 
             txtbNewCutDetails.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            txtbNewCutDetails.Location = new Point(399, 83);
+            txtbNewCutDetails.Location = new Point(349, 62);
+            txtbNewCutDetails.Margin = new Padding(3, 2, 3, 2);
             txtbNewCutDetails.Name = "txtbNewCutDetails";
             txtbNewCutDetails.PlaceholderText = "Ingrese los detalles";
-            txtbNewCutDetails.Size = new Size(180, 27);
+            txtbNewCutDetails.Size = new Size(158, 23);
             txtbNewCutDetails.TabIndex = 21;
             // 
             // lblNewCutDetails
@@ -404,19 +420,20 @@
             lblNewCutDetails.AutoSize = true;
             lblNewCutDetails.Font = new Font("Sitka Heading", 13F, FontStyle.Italic, GraphicsUnit.Point);
             lblNewCutDetails.ForeColor = Color.White;
-            lblNewCutDetails.Location = new Point(309, 77);
+            lblNewCutDetails.Location = new Point(270, 58);
             lblNewCutDetails.Name = "lblNewCutDetails";
-            lblNewCutDetails.Size = new Size(85, 32);
+            lblNewCutDetails.Size = new Size(73, 26);
             lblNewCutDetails.TabIndex = 20;
             lblNewCutDetails.Text = "Detalles";
             // 
             // txtbNewCutStock
             // 
             txtbNewCutStock.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            txtbNewCutStock.Location = new Point(98, 84);
+            txtbNewCutStock.Location = new Point(86, 63);
+            txtbNewCutStock.Margin = new Padding(3, 2, 3, 2);
             txtbNewCutStock.Name = "txtbNewCutStock";
             txtbNewCutStock.PlaceholderText = "Ingrese el stock";
-            txtbNewCutStock.Size = new Size(180, 27);
+            txtbNewCutStock.Size = new Size(158, 23);
             txtbNewCutStock.TabIndex = 19;
             // 
             // lblNewCutStock
@@ -425,19 +442,20 @@
             lblNewCutStock.AutoSize = true;
             lblNewCutStock.Font = new Font("Sitka Heading", 13F, FontStyle.Italic, GraphicsUnit.Point);
             lblNewCutStock.ForeColor = Color.White;
-            lblNewCutStock.Location = new Point(6, 77);
+            lblNewCutStock.Location = new Point(5, 58);
             lblNewCutStock.Name = "lblNewCutStock";
-            lblNewCutStock.Size = new Size(63, 32);
+            lblNewCutStock.Size = new Size(52, 26);
             lblNewCutStock.TabIndex = 18;
             lblNewCutStock.Text = "Stock";
             // 
             // txtbNewCutPrice
             // 
             txtbNewCutPrice.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            txtbNewCutPrice.Location = new Point(399, 35);
+            txtbNewCutPrice.Location = new Point(349, 26);
+            txtbNewCutPrice.Margin = new Padding(3, 2, 3, 2);
             txtbNewCutPrice.Name = "txtbNewCutPrice";
             txtbNewCutPrice.PlaceholderText = "Ingrese el precio";
-            txtbNewCutPrice.Size = new Size(180, 27);
+            txtbNewCutPrice.Size = new Size(158, 23);
             txtbNewCutPrice.TabIndex = 17;
             // 
             // lblNewCutPrice
@@ -446,9 +464,9 @@
             lblNewCutPrice.AutoSize = true;
             lblNewCutPrice.Font = new Font("Sitka Heading", 13F, FontStyle.Italic, GraphicsUnit.Point);
             lblNewCutPrice.ForeColor = Color.White;
-            lblNewCutPrice.Location = new Point(309, 28);
+            lblNewCutPrice.Location = new Point(270, 21);
             lblNewCutPrice.Name = "lblNewCutPrice";
-            lblNewCutPrice.Size = new Size(70, 32);
+            lblNewCutPrice.Size = new Size(57, 26);
             lblNewCutPrice.TabIndex = 16;
             lblNewCutPrice.Text = "Precio";
             // 
@@ -462,11 +480,9 @@
             gbModifyProduct.Controls.Add(lblChangeStock);
             gbModifyProduct.Controls.Add(lblChangePrice);
             gbModifyProduct.ForeColor = Color.White;
-            gbModifyProduct.Location = new Point(85, 29);
-            gbModifyProduct.Margin = new Padding(3, 4, 3, 4);
+            gbModifyProduct.Location = new Point(74, 22);
             gbModifyProduct.Name = "gbModifyProduct";
-            gbModifyProduct.Padding = new Padding(3, 4, 3, 4);
-            gbModifyProduct.Size = new Size(513, 144);
+            gbModifyProduct.Size = new Size(449, 108);
             gbModifyProduct.TabIndex = 22;
             gbModifyProduct.TabStop = false;
             gbModifyProduct.Text = "Modificar Producto";
@@ -478,9 +494,9 @@
             lblTotal.BackColor = Color.Transparent;
             lblTotal.Font = new Font("Sitka Small", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             lblTotal.ForeColor = Color.White;
-            lblTotal.Location = new Point(997, -47);
+            lblTotal.Location = new Point(872, -35);
             lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(63, 24);
+            lblTotal.Size = new Size(50, 19);
             lblTotal.TabIndex = 23;
             lblTotal.Text = "Total:";
             // 
@@ -491,9 +507,9 @@
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Sitka Subheading", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(1039, 463);
+            label1.Location = new Point(909, 347);
             label1.Name = "label1";
-            label1.Size = new Size(246, 21);
+            label1.Size = new Size(194, 18);
             label1.TabIndex = 29;
             label1.Text = "Seleccione un producto y presione";
             // 
@@ -503,10 +519,9 @@
             btnDeleteProduct.BackColor = Color.LightCoral;
             btnDeleteProduct.FlatStyle = FlatStyle.Flat;
             btnDeleteProduct.Font = new Font("Sitka Subheading", 11.249999F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btnDeleteProduct.Location = new Point(1055, 491);
-            btnDeleteProduct.Margin = new Padding(3, 4, 3, 4);
+            btnDeleteProduct.Location = new Point(923, 368);
             btnDeleteProduct.Name = "btnDeleteProduct";
-            btnDeleteProduct.Size = new Size(193, 47);
+            btnDeleteProduct.Size = new Size(169, 35);
             btnDeleteProduct.TabIndex = 28;
             btnDeleteProduct.Text = "Eliminar Producto";
             btnDeleteProduct.UseVisualStyleBackColor = false;
@@ -519,35 +534,20 @@
             lblErrorDeleteProduct.BackColor = Color.Transparent;
             lblErrorDeleteProduct.Font = new Font("SimSun", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblErrorDeleteProduct.ForeColor = Color.Red;
-            lblErrorDeleteProduct.Location = new Point(994, 429);
+            lblErrorDeleteProduct.Location = new Point(870, 322);
             lblErrorDeleteProduct.Name = "lblErrorDeleteProduct";
-            lblErrorDeleteProduct.Size = new Size(322, 24);
+            lblErrorDeleteProduct.Size = new Size(273, 19);
             lblErrorDeleteProduct.TabIndex = 30;
             lblErrorDeleteProduct.Text = "Producto NO seleccionado";
             lblErrorDeleteProduct.Visible = false;
-            // 
-            // btnBack
-            // 
-            btnBack.BackColor = Color.Black;
-            btnBack.BackgroundImage = Properties.Resources._858_8583460_back_button_orange;
-            btnBack.BackgroundImageLayout = ImageLayout.Zoom;
-            btnBack.Location = new Point(9, 980);
-            btnBack.Margin = new Padding(3, 4, 3, 4);
-            btnBack.Name = "btnBack";
-            btnBack.Size = new Size(130, 65);
-            btnBack.TabIndex = 31;
-            btnBack.TextAlign = ContentAlignment.MiddleRight;
-            btnBack.UseVisualStyleBackColor = false;
-            btnBack.Click += button1_Click;
             // 
             // btnReceiptsList
             // 
             btnReceiptsList.BackColor = Color.FromArgb(192, 192, 255);
             btnReceiptsList.Font = new Font("Sitka Subheading", 14.2499981F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            btnReceiptsList.Location = new Point(1528, 980);
-            btnReceiptsList.Margin = new Padding(3, 4, 3, 4);
+            btnReceiptsList.Location = new Point(1337, 735);
             btnReceiptsList.Name = "btnReceiptsList";
-            btnReceiptsList.Size = new Size(242, 65);
+            btnReceiptsList.Size = new Size(212, 49);
             btnReceiptsList.TabIndex = 32;
             btnReceiptsList.Text = "Historial de Recibos";
             btnReceiptsList.UseVisualStyleBackColor = false;
@@ -559,11 +559,9 @@
             groupBox1.Controls.Add(gbModifyProduct);
             groupBox1.Controls.Add(gbAddNewCut);
             groupBox1.ForeColor = Color.White;
-            groupBox1.Location = new Point(119, 724);
-            groupBox1.Margin = new Padding(3, 4, 3, 4);
+            groupBox1.Location = new Point(104, 543);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 4, 3, 4);
-            groupBox1.Size = new Size(1574, 204);
+            groupBox1.Size = new Size(1377, 153);
             groupBox1.TabIndex = 34;
             groupBox1.TabStop = false;
             groupBox1.Text = "Modificar stock";
@@ -575,9 +573,9 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Sitka Heading", 16F, FontStyle.Italic, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(5, 31);
+            label2.Location = new Point(4, 23);
             label2.Name = "label2";
-            label2.Size = new Size(116, 39);
+            label2.Size = new Size(95, 32);
             label2.TabIndex = 35;
             label2.Text = "Heladera";
             // 
@@ -587,9 +585,9 @@
             lblErrorSelectedProduct.BackColor = Color.Transparent;
             lblErrorSelectedProduct.Font = new Font("SimSun", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblErrorSelectedProduct.ForeColor = Color.Red;
-            lblErrorSelectedProduct.Location = new Point(486, 619);
+            lblErrorSelectedProduct.Location = new Point(425, 464);
             lblErrorSelectedProduct.Name = "lblErrorSelectedProduct";
-            lblErrorSelectedProduct.Size = new Size(426, 24);
+            lblErrorSelectedProduct.Size = new Size(361, 19);
             lblErrorSelectedProduct.TabIndex = 36;
             lblErrorSelectedProduct.Text = "Ningun producto fue seleccionado";
             lblErrorSelectedProduct.Visible = false;
@@ -600,9 +598,9 @@
             lblErrorQuantityEmpty.BackColor = Color.Transparent;
             lblErrorQuantityEmpty.Font = new Font("SimSun", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblErrorQuantityEmpty.ForeColor = Color.Red;
-            lblErrorQuantityEmpty.Location = new Point(473, 619);
+            lblErrorQuantityEmpty.Location = new Point(414, 464);
             lblErrorQuantityEmpty.Name = "lblErrorQuantityEmpty";
-            lblErrorQuantityEmpty.Size = new Size(439, 24);
+            lblErrorQuantityEmpty.Size = new Size(372, 19);
             lblErrorQuantityEmpty.TabIndex = 37;
             lblErrorQuantityEmpty.Text = "Indique una cantidad mayor a cero";
             lblErrorQuantityEmpty.Visible = false;
@@ -614,9 +612,9 @@
             lblErrorEmptyCart.BackColor = Color.Transparent;
             lblErrorEmptyCart.Font = new Font("SimSun", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblErrorEmptyCart.ForeColor = Color.Red;
-            lblErrorEmptyCart.Location = new Point(1197, 619);
+            lblErrorEmptyCart.Location = new Point(1047, 464);
             lblErrorEmptyCart.Name = "lblErrorEmptyCart";
-            lblErrorEmptyCart.Size = new Size(283, 24);
+            lblErrorEmptyCart.Size = new Size(240, 19);
             lblErrorEmptyCart.TabIndex = 38;
             lblErrorEmptyCart.Text = "El carrito esta vacio";
             lblErrorEmptyCart.Visible = false;
@@ -627,25 +625,12 @@
             lblErrorNumber.BackColor = Color.Transparent;
             lblErrorNumber.Font = new Font("SimSun", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblErrorNumber.ForeColor = Color.Red;
-            lblErrorNumber.Location = new Point(232, 932);
+            lblErrorNumber.Location = new Point(203, 699);
             lblErrorNumber.Name = "lblErrorNumber";
-            lblErrorNumber.Size = new Size(738, 24);
+            lblErrorNumber.Size = new Size(625, 19);
             lblErrorNumber.TabIndex = 39;
             lblErrorNumber.Text = "Debe seleccionar un corte e ingresar un numero mayor a 0";
             lblErrorNumber.Visible = false;
-            // 
-            // lblErrorBack
-            // 
-            lblErrorBack.AutoSize = true;
-            lblErrorBack.BackColor = Color.Transparent;
-            lblErrorBack.Font = new Font("SimSun", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblErrorBack.ForeColor = Color.Red;
-            lblErrorBack.Location = new Point(146, 1001);
-            lblErrorBack.Name = "lblErrorBack";
-            lblErrorBack.Size = new Size(465, 24);
-            lblErrorBack.TabIndex = 40;
-            lblErrorBack.Text = "El carrito todavia tiene productos!";
-            lblErrorBack.Visible = false;
             // 
             // btnDelProductFromFridge
             // 
@@ -656,9 +641,10 @@
             btnDelProductFromFridge.FlatStyle = FlatStyle.Flat;
             btnDelProductFromFridge.Font = new Font("Sitka Heading", 13F, FontStyle.Italic, GraphicsUnit.Point);
             btnDelProductFromFridge.ForeColor = Color.Black;
-            btnDelProductFromFridge.Location = new Point(678, 663);
+            btnDelProductFromFridge.Location = new Point(593, 497);
+            btnDelProductFromFridge.Margin = new Padding(3, 2, 3, 2);
             btnDelProductFromFridge.Name = "btnDelProductFromFridge";
-            btnDelProductFromFridge.Size = new Size(221, 55);
+            btnDelProductFromFridge.Size = new Size(193, 41);
             btnDelProductFromFridge.TabIndex = 41;
             btnDelProductFromFridge.Text = "Eliminar Producto";
             btnDelProductFromFridge.UseVisualStyleBackColor = false;
@@ -670,23 +656,61 @@
             lblClock.BackColor = Color.Transparent;
             lblClock.Font = new Font("Times New Roman", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
             lblClock.ForeColor = Color.White;
-            lblClock.Location = new Point(398, 15);
+            lblClock.Location = new Point(348, 11);
             lblClock.Name = "lblClock";
-            lblClock.Size = new Size(94, 38);
+            lblClock.Size = new Size(77, 31);
             lblClock.TabIndex = 42;
             lblClock.Text = "Reloj";
             // 
+            // btnCreateFiles
+            // 
+            btnCreateFiles.BackColor = Color.FromArgb(192, 192, 255);
+            btnCreateFiles.Font = new Font("Sitka Subheading", 14F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btnCreateFiles.Location = new Point(1119, 735);
+            btnCreateFiles.Name = "btnCreateFiles";
+            btnCreateFiles.Size = new Size(212, 49);
+            btnCreateFiles.TabIndex = 43;
+            btnCreateFiles.Text = "Crear Archivos";
+            btnCreateFiles.UseVisualStyleBackColor = false;
+            btnCreateFiles.Click += btnCreateFiles_Click;
+            // 
+            // btnReplaceStock
+            // 
+            btnReplaceStock.BackColor = Color.FromArgb(192, 192, 255);
+            btnReplaceStock.Font = new Font("Sitka Subheading", 14.2499981F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btnReplaceStock.Location = new Point(681, 735);
+            btnReplaceStock.Name = "btnReplaceStock";
+            btnReplaceStock.Size = new Size(212, 49);
+            btnReplaceStock.TabIndex = 44;
+            btnReplaceStock.Text = "Reponer Produtos";
+            btnReplaceStock.UseVisualStyleBackColor = false;
+            btnReplaceStock.Click += btnReplaceStock_Click;
+            // 
+            // btnReadFiles
+            // 
+            btnReadFiles.BackColor = Color.FromArgb(192, 192, 255);
+            btnReadFiles.Font = new Font("Sitka Subheading", 14F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            btnReadFiles.Location = new Point(899, 735);
+            btnReadFiles.Name = "btnReadFiles";
+            btnReadFiles.Size = new Size(212, 49);
+            btnReadFiles.TabIndex = 45;
+            btnReadFiles.Text = "Leer Archivos";
+            btnReadFiles.UseVisualStyleBackColor = false;
+            btnReadFiles.Click += btnReadFiles_Click;
+            // 
             // FormHeladera
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             BackgroundImage = Properties.Resources.Sin_título_1;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(1784, 1055);
+            ClientSize = new Size(1561, 791);
+            Controls.Add(btnReadFiles);
+            Controls.Add(btnReplaceStock);
+            Controls.Add(btnCreateFiles);
             Controls.Add(lblClock);
             Controls.Add(btnDelProductFromFridge);
-            Controls.Add(lblErrorBack);
             Controls.Add(lblErrorNumber);
             Controls.Add(lblErrorEmptyCart);
             Controls.Add(lblErrorQuantityEmpty);
@@ -699,7 +723,6 @@
             Controls.Add(btnReceiptsList);
             Controls.Add(btnDeleteProduct);
             Controls.Add(lblTotal);
-            Controls.Add(btnBack);
             Controls.Add(lblCart);
             Controls.Add(lvCart);
             Controls.Add(btnAddToCart);
@@ -710,7 +733,8 @@
             Controls.Add(nudKilos);
             Controls.Add(lblSelectQuantity);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MinimumSize = new Size(1000, 498);
+            Margin = new Padding(3, 2, 3, 2);
+            MinimumSize = new Size(877, 383);
             Name = "FormHeladera";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Heladera";
@@ -767,7 +791,6 @@
         private Label label1;
         private Button btnDeleteProduct;
         private Label lblErrorDeleteProduct;
-        private Button btnBack;
         private Button btnReceiptsList;
         private GroupBox groupBox1;
         private Label label2;
@@ -775,8 +798,10 @@
         private Label lblErrorQuantityEmpty;
         private Label lblErrorEmptyCart;
         private Label lblErrorNumber;
-        private Label lblErrorBack;
         private Button btnDelProductFromFridge;
         private Label lblClock;
+        private Button btnCreateFiles;
+        private Button btnReplaceStock;
+        private Button btnReadFiles;
     }
 }

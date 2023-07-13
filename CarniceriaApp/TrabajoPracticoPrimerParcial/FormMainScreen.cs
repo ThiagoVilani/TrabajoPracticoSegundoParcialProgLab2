@@ -36,9 +36,12 @@ namespace TrabajoPracticoPrimerParcial
             if(carniceria.sellersDBC.ValidateCredentials(txtbMail.Text.ToLower(),txtbPassword.Text))
             {
                 carniceria.CurrentSeller = carniceria.sellersDBC.ExtractUser(txtbMail.Text.ToLower(), txtbPassword.Text);
-                FormSellerMenu menu = new FormSellerMenu(this.carniceria);
-                menu.Show();
+                FormHeladera frmHeladera = new FormHeladera(carniceria);
+                frmHeladera.Show();
                 this.Hide();
+                //FormSellerMenu menu = new FormSellerMenu(this.carniceria);
+                //menu.Show();
+                //this.Hide();
             }
             else
             {
