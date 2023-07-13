@@ -55,7 +55,7 @@ namespace BibliotecaDeClases
                 command.ExecuteNonQuery();
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -82,7 +82,7 @@ namespace BibliotecaDeClases
                 return seller;
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -107,7 +107,7 @@ namespace BibliotecaDeClases
                 return seller;
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
         public bool ValidateCredentials(string email, string password)
@@ -144,7 +144,7 @@ namespace BibliotecaDeClases
             }
             finally
             {
-                connection.Close();
+                Close();
             }
         }
 
@@ -160,7 +160,7 @@ namespace BibliotecaDeClases
                 command.ExecuteNonQuery();
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 

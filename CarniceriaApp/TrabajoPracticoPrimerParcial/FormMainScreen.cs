@@ -39,9 +39,6 @@ namespace TrabajoPracticoPrimerParcial
                 FormHeladera frmHeladera = new FormHeladera(carniceria);
                 frmHeladera.Show();
                 this.Hide();
-                //FormSellerMenu menu = new FormSellerMenu(this.carniceria);
-                //menu.Show();
-                //this.Hide();
             }
             else
             {

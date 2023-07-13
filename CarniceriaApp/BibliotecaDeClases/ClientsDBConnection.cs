@@ -30,6 +30,14 @@ namespace BibliotecaDeClases
             }
         }
 
+        public static void Close()
+        {
+            if (connection.State != ConnectionState.Closed)
+            {
+                connection.Close();
+            }
+        }
+
         public Client ExtractUser(int id)
         {
             Client client = null;
@@ -54,7 +62,7 @@ namespace BibliotecaDeClases
                 return client;
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -81,7 +89,7 @@ namespace BibliotecaDeClases
                 return client;
             }
             catch{throw;}
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -108,7 +116,7 @@ namespace BibliotecaDeClases
                 return clients;
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -141,7 +149,7 @@ namespace BibliotecaDeClases
                 return result;
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -163,7 +171,7 @@ namespace BibliotecaDeClases
                 command.ExecuteNonQuery();
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
 
 
@@ -179,7 +187,7 @@ namespace BibliotecaDeClases
                 command.ExecuteNonQuery();
             }
             catch { throw; }
-            finally { connection.Close(); }
+            finally { Close(); }
         }
     }
 }

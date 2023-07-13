@@ -263,11 +263,14 @@ namespace TrabajoPracticoPrimerParcial
         private void btnDelProductFromFridge_Click(object sender, EventArgs e)
         {
             Sounds.PlayClickSound3();
-            indexItemSelectedFromFridge = dgvProductsGrid.CurrentRow.Index;
-            carniceria.DeleteProductInDB(carniceria.Products[indexItemSelectedFromFridge].ID);
-            carniceria.Products.RemoveAt(indexItemSelectedFromFridge);
-            indexItemSelectedFromFridge = -1;
-            UpdateProductsGrid(carniceria.Products);
+            if(lblSelectedProduct.Text != "Sin seleccion")
+            {
+                indexItemSelectedFromFridge = dgvProductsGrid.CurrentRow.Index;
+                carniceria.DeleteProductInDB(carniceria.Products[indexItemSelectedFromFridge].ID);
+                carniceria.Products.RemoveAt(indexItemSelectedFromFridge);
+                indexItemSelectedFromFridge = -1;
+                UpdateProductsGrid(carniceria.Products);
+            }
         }
 
 
@@ -531,20 +534,20 @@ namespace TrabajoPracticoPrimerParcial
                 {
                     Invoke((MethodInvoker)delegate
                     {
-                        if (carniceria.ChangeQuantityProducts())
+                        if (carniceria.ChangeQuantityProducts())//Cambio en el carrito
                         {
                             UpdateLVCart();
                             UpdateProductsGrid(carniceria.Products);
                         }
-                        if (carniceria.ChangeQuantityClients())
+                        if (carniceria.ChangeQuantityClients())//Ya se atendio algun cliente?
                         {
                             UpdateLVClients();
                         }
-                        if (carniceria.ChangesInStock())
+                        if (carniceria.ChangesInStock())//Cambio en el stock de los productos
                         {
                             UpdateProductsGrid(carniceria.Products);
                         }
-                        if (EnableBtnAddNewCut())
+                        if (EnableBtnAddNewCut())//Habilita el boton de agregar un corte nuevo
                         {
                             btnAddCut.Enabled = true;
                             btnAddCut.BackColor = Color.Green;
