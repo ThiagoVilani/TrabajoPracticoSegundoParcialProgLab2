@@ -19,7 +19,7 @@ namespace TrabajoPracticoPrimerParcial
             InitializeComponent();
             this.carniceria = carniceria;
             ConfigureListView();
-            AddRowProducts(CarniceriaDBConnection.ExtractReceiptsList(carniceria.sellersDBC, carniceria.clientsDBC));
+            AddRowProducts(carniceria.ExtractReceiptsListFromDB(carniceria.sellersDBC, carniceria.clientsDBC));
         }
         private void ConfigureListView()
         {
@@ -49,7 +49,7 @@ namespace TrabajoPracticoPrimerParcial
         private void lvReceiptHistory_DoubleClick(object sender, EventArgs e)
         {
             int rowIndex = lvReceiptHistory.SelectedIndices[0];
-            FormReceipt receipt = new FormReceipt(CarniceriaDBConnection.ExtractReceipt(int.Parse(lvReceiptHistory.Items[rowIndex].SubItems[0].Text),carniceria.sellersDBC,carniceria.clientsDBC),carniceria);
+            FormReceipt receipt = new FormReceipt(carniceria.ExtractReceiptFromDB(int.Parse(lvReceiptHistory.Items[rowIndex].SubItems[0].Text),carniceria.sellersDBC,carniceria.clientsDBC),carniceria);
             receipt.ShowDialog();
         }
     }

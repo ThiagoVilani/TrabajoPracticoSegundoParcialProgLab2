@@ -60,8 +60,8 @@ namespace TrabajoPracticoPrimerParcial
                 {
                     carniceria.ProductsOutOfStock[indexItemSelected].Stock = (double)nudKilos.Value;
                     carniceria.Products.Add(carniceria.ProductsOutOfStock[indexItemSelected]);
-                    CarniceriaDBConnection.InsertProduct(carniceria.ProductsOutOfStock[indexItemSelected]);
-                    CarniceriaDBConnection.DeleteProduct(carniceria.ProductsOutOfStock[indexItemSelected].ID,true);
+                    carniceria.InsertProductToDB(carniceria.ProductsOutOfStock[indexItemSelected]);
+                    carniceria.DeleteProductInDB(carniceria.ProductsOutOfStock[indexItemSelected].ID,true);
                     carniceria.ProductsOutOfStock.RemoveAt(indexItemSelected);
                     indexItemSelected = -1;
                     UpdateLVProducts();

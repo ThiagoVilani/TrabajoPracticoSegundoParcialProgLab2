@@ -62,7 +62,8 @@
 
         public void CalculateRemainingMoney(Product product, int quantity)
         {
-            this.CantidadDinero -= (product.Price * quantity);
+            this.CantidadDinero -= product.Price * quantity;
+            ClientsDBConnection.UpdateClientMoney(this.ID, (int)this.CantidadDinero);
         }
     }
 }

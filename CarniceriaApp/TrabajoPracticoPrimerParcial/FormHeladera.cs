@@ -206,7 +206,6 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="e"></param>
         private void btnDeleteProduct_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Thread.CurrentThread.ManagedThreadId.ToString());
             Sounds.PlayClickSound3();
             foreach (ListViewItem item in lvCart.SelectedItems)
             {
@@ -281,7 +280,7 @@ namespace TrabajoPracticoPrimerParcial
         {
             Sounds.PlayClickSound3();
             indexItemSelectedFromFridge = dgvProductsGrid.CurrentRow.Index;
-            CarniceriaDBConnection.DeleteProduct(carniceria.Products[indexItemSelectedFromFridge].ID);
+            carniceria.DeleteProductInDB(carniceria.Products[indexItemSelectedFromFridge].ID);
             carniceria.Products.RemoveAt(indexItemSelectedFromFridge);
             indexItemSelectedFromFridge = -1;
             UpdateProductsGrid(carniceria.Products);
@@ -439,7 +438,6 @@ namespace TrabajoPracticoPrimerParcial
                 if (newPrice > 0)
                 {
                     carniceria.CurrentSeller.ChangePrice(carniceria.Products, dgvProductsGrid.CurrentRow.Index, newPrice);
-                    //carniceria.Products[dgvProductsGrid.CurrentRow.Index].Price = newPrice;
                 }
                 else
                 {
@@ -482,7 +480,7 @@ namespace TrabajoPracticoPrimerParcial
             if (price > 0 && stock > 0)
             {
                 Product product = new Product(name, price, stock, details);
-                CarniceriaDBConnection.InsertProduct(product);
+                carniceria.InsertProductToDB(product);
                 carniceria.Products.Add(product);
                 UpdateAll();
             }
@@ -523,12 +521,15 @@ namespace TrabajoPracticoPrimerParcial
         {
             while (!stopClock)
             {
-                //MessageBox.Show(Thread.CurrentThread.ManagedThreadId.ToString());
-                Invoke((MethodInvoker)delegate
+                try
                 {
-                    lblClock.Text = $"Fecha: {DateTime.Now.ToString("dd/MM/yyyy")} | Hora: {DateTime.Now.ToString("HH:mm:ss")}";
-                });
-                Thread.Sleep(10000);
+                    Invoke((MethodInvoker)delegate
+                    {
+                        lblClock.Text = $"Fecha: {DateTime.Now.ToString("dd/MM/yyyy")} | Hora: {DateTime.Now.ToString("HH:mm:ss")}";
+                    });
+                }
+                catch { }
+                Thread.Sleep(1000);
             }
         }
 
@@ -542,34 +543,32 @@ namespace TrabajoPracticoPrimerParcial
         {
             while (true)
             {
-                Invoke((MethodInvoker)delegate
+                try
                 {
-                    if (carniceria.ChangeQuantityProducts())
+                    Invoke((MethodInvoker)delegate
                     {
-                        UpdateLVCart();
-                        UpdateProductsGrid(carniceria.Products);
-                    }
-                    if (carniceria.ChangeQuantityClients())
-                    {
-                        UpdateLVClients();
-                    }
-                    if (carniceria.ChangesInStock())
-                    {
-                        UpdateProductsGrid(carniceria.Products);
-                    }
-                    if (EnableBtnAddNewCut())
-                    {
-                        Task.Run(() =>
+                        if (carniceria.ChangeQuantityProducts())
                         {
-                            Invoke((MethodInvoker)delegate
-                            {
-                                btnAddCut.Enabled = true;
-                                btnAddCut.BackColor = Color.Green;
-                            });
-                        });
-                    }
-                });
-                Thread.Sleep(1000);
+                            UpdateLVCart();
+                            UpdateProductsGrid(carniceria.Products);
+                        }
+                        if (carniceria.ChangeQuantityClients())
+                        {
+                            UpdateLVClients();
+                        }
+                        if (carniceria.ChangesInStock())
+                        {
+                            UpdateProductsGrid(carniceria.Products);
+                        }
+                        if (EnableBtnAddNewCut())
+                        {
+                            btnAddCut.Enabled = true;
+                            btnAddCut.BackColor = Color.Green;
+                        }
+                    });
+                    Thread.Sleep(1000);
+                }
+                catch{}
             }
         }
     }

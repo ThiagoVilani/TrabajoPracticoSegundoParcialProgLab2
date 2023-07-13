@@ -12,13 +12,63 @@ namespace BibliotecaDeClases
 {
     public static class DBConnection
     {
+        private static string connectionString = "Data Source=.;Initial Catalog=Carniceria; Integrated Security=True";
+        private static SqlConnection connection = new SqlConnection();
+        private static SqlCommand command;
         static DBConnection()
         {
+            connection.ConnectionString = connectionString;
+            command = new SqlCommand();
+            command.CommandType = System.Data.CommandType.Text;
+            command.Connection = connection;
         }
 
-        //      ////////////////////////////////////////////////////////
-        //      ////////////////////////////////////////////////////////
-        //      ///////////////////////////////////////////////////////
+
+        public static void Open()
+        {
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+        }
+
+        public static void Close()
+        {
+            if (connection.State != ConnectionState.Closed)
+            {
+                connection.Close();
+            }
+        }
+
+
+        public static void InsertProduct(Product product, bool isOutOfStock = false)
+        {
+            try
+            {
+                Open();
+                command.Parameters.Clear();
+                if (isOutOfStock)
+                {
+                    command.CommandText = $"INSERT INTO ProductsOutOfStock (ID,nombre,[precio kilo],[stock kilos], detalles) " +
+                                          $"VALUES (@ID, @Name, @Price,@Stock,@Details)";
+                }
+                else
+                {
+                    command.CommandText = $"INSERT INTO Products (ID,nombre,[precio kilo],[stock kilos], detalles) " +
+                                          $"VALUES (@ID, @Name, @Price,@Stock,@Details)";
+                }
+                command.Parameters.AddWithValue("@ID", product.ID);
+                command.Parameters.AddWithValue("@Name", product.Name);
+                command.Parameters.AddWithValue("@Price", product.Price);
+                command.Parameters.AddWithValue("@Stock", product.Stock);
+                command.Parameters.AddWithValue("@Details", product.Details);
+                command.ExecuteNonQuery();
+            }
+            catch { throw; }
+            finally { Close(); }
+        }
+
+
         public static void meterproducto()
         {
             List<Product> lista = new List<Product>();
@@ -33,7 +83,7 @@ namespace BibliotecaDeClases
             lista.Add(new Product("Falda", 800, 12, "Combina carne magra, betas de grasa y fibra, tierno, jugosos y delicioso sabor, sin llegar a ser un corte duro."));
             foreach (Product p in lista)
             {
-                CarniceriaDBConnection.InsertProduct(p);
+                InsertProduct(p);
             }
         }
 
@@ -56,7 +106,7 @@ namespace BibliotecaDeClases
         public static void metervendedores(SellersDBConnection sellerDBC)
         {
             List<Seller> lista = new List<Seller>();
-            lista.Add(new Seller("mario","mario@gmail.com","mario123",400));
+            lista.Add(new Seller("mario", "mario@gmail.com", "mario123", 400));
             lista.Add(new Seller("Luciana", "luciana@gmail.com", "luciana123", 236));
             lista.Add(new Seller("DonBosco", "donbosco@gmail.com", "Donbosco123", 125));
             foreach (Seller seller in lista)

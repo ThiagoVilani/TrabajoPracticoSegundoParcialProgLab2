@@ -30,19 +30,34 @@ namespace BibliotecaDeClases
             }
         }
 
+        public static void Close()
+        {
+            if (connection.State != ConnectionState.Closed)
+            {
+                connection.Close();
+            }
+        }
+
 
         public void InsertUser(Seller seller)
         {
             try
             {
                 Open();
+                command.Parameters.Clear();
                 command.CommandText = $"INSERT INTO Sellers (ID,nombre,email,contraseña,[cantidad ventas]) " +
-                                      $"VALUES ('{seller.ID}','{seller.Name}','{seller.Mail}','{seller.Password}','{(int)seller.QuantityOfSales}')";
+                                      $"VALUES (@ID,@Name,@Mail,@Password,@QuantityOfSales)";
+                command.Parameters.AddWithValue("@ID", seller.ID);
+                command.Parameters.AddWithValue("@Name", seller.Name);
+                command.Parameters.AddWithValue("@Mail", seller.Mail);
+                command.Parameters.AddWithValue("@Password", seller.Password);
+                command.Parameters.AddWithValue("@QuantityOfSales", seller.QuantityOfSales);
                 command.ExecuteNonQuery();
             }
             catch { throw; }
             finally { connection.Close(); }
         }
+
 
         public Seller ExtractUser(int id)
         {
@@ -50,7 +65,9 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"SELECT * FROM Sellers WHERE ID = {id}";
+                command.Parameters.Clear();
+                command.CommandText = $"SELECT * FROM Sellers WHERE ID = @ID";
+                command.Parameters.AddWithValue("@ID", id);
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
                     while (dataReader.Read())
@@ -75,7 +92,9 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"SELECT * FROM Sellers WHERE email = '{email}'";
+                command.Parameters.Clear();
+                command.CommandText = $"SELECT * FROM Sellers WHERE email = @Email";
+                command.Parameters.AddWithValue("@Email", email);
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
                     while (dataReader.Read())
@@ -97,13 +116,16 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"SELECT * FROM Sellers WHERE email = '{email}'";
+                command.Parameters.Clear();
+                command.CommandText = $"SELECT * FROM Sellers WHERE email = @Email";
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@Password", password);
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
                     while (dataReader.Read())
                     {
                         dataReader.Close();
-                        command.CommandText = $"SELECT * FROM Sellers WHERE contraseña = '{password}'";
+                        command.CommandText = $"SELECT * FROM Sellers WHERE contraseña = @Password";
                         using (SqlDataReader dataReader2 = command.ExecuteReader())
                         {
                             while (dataReader2.Read())
@@ -131,11 +153,53 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"UPDATE Sellers SET [cantidad ventas] = {quatityOfSales} WHERE ID = {id}";
+                command.Parameters.Clear();
+                command.CommandText = $"UPDATE Sellers SET [cantidad ventas] = @QuantityOfSales WHERE ID = @ID";
+                command.Parameters.AddWithValue("@QuantityOfSales", quatityOfSales);
+                command.Parameters.AddWithValue("@ID", id);
                 command.ExecuteNonQuery();
             }
             catch { throw; }
             finally { connection.Close(); }
+        }
+
+
+        public static void UpdatePrice(int id, int newPrice)
+        {
+            try
+            {
+                Open();
+                command.Parameters.Clear();
+                command.CommandText = $"UPDATE Products SET [precio kilo] = @NewPrice WHERE ID = @ID";
+                command.Parameters.AddWithValue("@ID", id);
+                command.Parameters.AddWithValue("@NewPrice", newPrice);
+                command.ExecuteNonQuery();
+            }
+            catch { throw; }
+            finally { Close(); }
+        }
+
+
+        public static void UpdateStock(int id, int quantity, bool isSubstraction = false)
+        {
+            try
+            {
+                Open();
+                command.Parameters.Clear();
+                if (isSubstraction)
+                {
+                    command.CommandText = $"UPDATE Products SET [stock kilos] = [stock kilos] - @Quantity WHERE ID = @ID";
+                }
+                else
+                {
+                    command.CommandText = $"UPDATE Products SET [stock kilos] = [stock kilos] + @Quantity WHERE ID = @ID";
+                }
+                command.Parameters.AddWithValue("@Quantity", quantity);
+                command.Parameters.AddWithValue("@ID", id);
+                command.ExecuteNonQuery();
+            }
+            catch { throw; }
+            finally { Close(); }
         }
     }
 }

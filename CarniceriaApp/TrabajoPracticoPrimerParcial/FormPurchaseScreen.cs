@@ -25,7 +25,7 @@ namespace TrabajoPracticoPrimerParcial
             this.carniceria = carniceria;
             this.sellerDBC = sellerDBC;
             this.clientDBC = clientDBC;
-            AddRowOfProducts(CarniceriaDBConnection.ExtractProducts());
+            AddRowOfProducts(carniceria.ExtractProductsFromDB());
             ConfigureListView();
             indexItemSelected = -1;
             lblRemainingMoney.Text = $"Dinero restante: {carniceria.CurrentClient.CantidadDinero}";
@@ -61,6 +61,7 @@ namespace TrabajoPracticoPrimerParcial
                         {
                             lblRemainingMoney.Text = "Dinero restante: 0";
                         }
+                        lblTotal.Text = $"Total:  {carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart)}";
                     });
                 });
             }
@@ -83,12 +84,6 @@ namespace TrabajoPracticoPrimerParcial
                 prodcutIndex = dgvProductsGrid.CurrentRow.Index;
                 if (lblSelectedProduct.Text != "Sin seleccion")
                 {
-                    Task.Run(() =>
-                    {
-                        btnAddToCart.BackColor = Color.Green;
-                        Thread.Sleep(1000);
-                        btnAddToCart.BackColor = Color.LightCoral;
-                    });
                     lblErrorSelection.Visible = false;
                     carniceria.CurrentSeller.AddToCart(prodcutIndex, quantity, carniceria.Products, carniceria.Cart);
                     carniceria.CurrentClient.CalculateRemainingMoney(carniceria.Products[prodcutIndex],quantity);
@@ -116,18 +111,8 @@ namespace TrabajoPracticoPrimerParcial
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            Task.Run(() =>
-            {
-                btnCleanFilters.BackColor = Color.Green;
-                Thread.Sleep(1000);
-                btnCleanFilters.BackColor = Color.LightCoral;
-            });
             Sounds.PlayClickSound3();
             UpdateProductsGrid(carniceria.Products);
-            //foreach (DataGridViewRow row in dgvProductsGrid.Rows)
-            //{
-            //    row.DefaultCellStyle.BackColor = Color.White;
-            //}
         }
 
         /// <summary>
@@ -151,12 +136,6 @@ namespace TrabajoPracticoPrimerParcial
             }
             if (indexItemSelected != -1)
             {
-                Task.Run(() =>
-                {
-                    btnDeleteProduct.BackColor = Color.Green;
-                    Thread.Sleep(1000);
-                    btnDeleteProduct.BackColor = Color.LightCoral;
-                });
                 lblErrorCart.Visible = false;
                 int pcount = carniceria.Products.Count();
                 int count = 0;

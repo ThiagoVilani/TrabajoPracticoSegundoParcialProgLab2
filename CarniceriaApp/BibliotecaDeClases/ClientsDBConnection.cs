@@ -36,7 +36,9 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"SELECT * FROM Clients WHERE ID = {id}";
+                command.Parameters.Clear();
+                command.CommandText = $"SELECT * FROM Clients WHERE ID = @ID";
+                command.Parameters.AddWithValue("@ID", id);
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
                     while (dataReader.Read())
@@ -62,7 +64,10 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"SELECT * FROM Clients WHERE email = '{email}' and contraseña = '{password}'";
+                command.Parameters.Clear();
+                command.CommandText = $"SELECT * FROM Clients WHERE email = @Email and contraseña = @Password";
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@Password", password);
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
                     while (dataReader.Read())
@@ -86,6 +91,7 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
+                command.Parameters.Clear();
                 command.CommandText = $"SELECT * FROM Clients";
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
@@ -112,13 +118,16 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"SELECT * FROM Clients WHERE email = '{email}'";
+                command.Parameters.Clear();
+                command.CommandText = $"SELECT * FROM Clients WHERE email = @Email";
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@Password", password);
                 using (SqlDataReader dataReader = command.ExecuteReader())
                 {
                     while (dataReader.Read())
                     {
                         dataReader.Close();
-                        command.CommandText = $"SELECT * FROM Clients WHERE contraseña = '{password}'";
+                        command.CommandText = $"SELECT * FROM Clients WHERE contraseña = @Password";
                         using (SqlDataReader dataReader2 = command.ExecuteReader())
                         {
                             while (dataReader2.Read())
@@ -137,12 +146,20 @@ namespace BibliotecaDeClases
 
 
         public void InsertUser(Client client)
+
         {
             try
             {
                 Open();
+                command.Parameters.Clear();
                 command.CommandText = $"INSERT INTO Clients (ID,nombre,email,contraseña,[cantidad dinero],pedido) " +
-                                      $"VALUES ('{client.ID}','{client.Name}','{client.Mail}','{client.Password}','{(int)client.CantidadDinero}','{client.Pedido}')";
+                                      $"VALUES (@ID,@Name,@Email,@Password,@MoneyAvailable,@Pedido)";
+                command.Parameters.AddWithValue("@ID", client.ID);
+                command.Parameters.AddWithValue("@Name", client.Name);
+                command.Parameters.AddWithValue("@Email", client.Mail);
+                command.Parameters.AddWithValue("@Password", client.Password);
+                command.Parameters.AddWithValue("@MoneyAvailable", client.CantidadDinero);
+                command.Parameters.AddWithValue("@Pedido", client.Pedido);
                 command.ExecuteNonQuery();
             }
             catch { throw; }
@@ -155,7 +172,10 @@ namespace BibliotecaDeClases
             try
             {
                 Open();
-                command.CommandText = $"UPDATE Clients SET [cantidad dinero] = {total} WHERE ID = {clientID}";
+                command.Parameters.Clear();
+                command.CommandText = $"UPDATE Clients SET [cantidad dinero] = @TOTAL WHERE ID = @ID";
+                command.Parameters.AddWithValue("@TOTAL", total);
+                command.Parameters.AddWithValue("@ID", clientID);
                 command.ExecuteNonQuery();
             }
             catch { throw; }

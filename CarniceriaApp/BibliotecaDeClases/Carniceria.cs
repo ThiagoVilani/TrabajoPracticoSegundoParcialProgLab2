@@ -46,9 +46,9 @@ namespace BibliotecaDeClases
         {
             this.ProductsOutOfStock[index].Stock++;
             this.Products.Add(this.ProductsOutOfStock[index]);
-            CarniceriaDBConnection.InsertProduct(this.ProductsOutOfStock[index]);
+            this.InsertProductToDB(this.ProductsOutOfStock[index]);
 
-            CarniceriaDBConnection.DeleteProduct(this.ProductsOutOfStock[index].ID,true);
+            this.DeleteProductInDB(this.ProductsOutOfStock[index].ID,true);
             this.ProductsOutOfStock.RemoveAt(index);
         }
 
@@ -57,7 +57,7 @@ namespace BibliotecaDeClases
         public void StockExpansion(int index)
         {
             this.Products[index].Stock++;
-            CarniceriaDBConnection.UpdateStock(this.Products[index].ID, 1);
+            this.UpdateStockInDB(this.Products[index].ID, 1);
         }
 
 
@@ -71,9 +71,9 @@ namespace BibliotecaDeClases
             this.clientsDBC = new ClientsDBConnection();
             this.sellersDBC = new SellersDBConnection();
             originalClientsList = new List<Client>(clientsDBC.ExtractList());
-            products = new List<Product>(CarniceriaDBConnection.ExtractProducts());
-            productsOutOfStock = new List<Product>(CarniceriaDBConnection.ExtractProducts(true));
-            receiptList = new List<Receipt>(CarniceriaDBConnection.ExtractReceiptsList(sellersDBC,clientsDBC));
+            products = new List<Product>(this.ExtractProductsFromDB());
+            productsOutOfStock = new List<Product>(this.ExtractProductsFromDB(true));
+            receiptList = new List<Receipt>(this.ExtractReceiptsListFromDB(sellersDBC,clientsDBC));
             foreach (Client client in originalClientsList)
             {
                 clients.Enqueue(client);
@@ -101,8 +101,8 @@ namespace BibliotecaDeClases
                 throw new NumeroNegativoException($"El indice ingresado es negativo ({productIndex}). El indice debe ser siempre positivo");
             }
             this.productsOutOfStock.Add(this.products[productIndex]);
-            CarniceriaDBConnection.InsertProduct(this.products[productIndex], true);
-            CarniceriaDBConnection.DeleteProduct(this.Products[productIndex].ID);
+            this.InsertProductToDB(this.products[productIndex], true);
+            this.DeleteProductInDB(this.Products[productIndex].ID);
         }
 
 

@@ -25,8 +25,8 @@ namespace TrabajoPracticoPrimerParcial
             ConfPosOfElements();
             this.carniceria = carniceria;
             this.isClient = isClient;
-            this.sellerDBC = sellerDBC;
-            this.clientDBC = clientDBC;
+            this.sellerDBC = new SellersDBConnection();
+            this.clientDBC = new ClientsDBConnection() ;
         }
 
 
@@ -52,18 +52,18 @@ namespace TrabajoPracticoPrimerParcial
                         {
                             carniceria.Clients.Dequeue();
                         }
-                        else
-                        {
-                            ClientsDBConnection.UpdateClientMoney(carniceria.CurrentClient.ID, (int)carniceria.CurrentClient.CantidadDinero);
-                        }
+                        ClientsDBConnection.UpdateClientMoney(carniceria.CurrentClient.ID, (int)carniceria.CurrentClient.CantidadDinero);
                         Receipt receipt = new Receipt(carniceria.Cart,
-                                                        carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart),
-                                                        carniceria.CurrentSeller.CalculateTotal(radioButton.Text,carniceria.Cart),
-                                                        carniceria.CurrentSeller,
-                                                        carniceria.CurrentClient,radioButton.Text);
-                        CarniceriaDBConnection.InsertReceipt(receipt);
+                                                      carniceria.CurrentSeller.CalculateSubTotal(carniceria.Cart),
+                                                      carniceria.CurrentSeller.CalculateTotal(radioButton.Text,carniceria.Cart),
+                                                      carniceria.CurrentSeller,
+                                                      carniceria.CurrentClient,radioButton.Text);
+                        carniceria.InsertReceiptToDB(receipt);
                         carniceria.ReceiptList.Add(receipt);
-                        carniceria.CurrentClient = carniceria.Clients.Peek();
+                        if (!isClient)
+                        {
+                            carniceria.CurrentClient = carniceria.Clients.Peek();
+                        }
                         FormReceipt formreceipt = new FormReceipt(receipt,carniceria);
                         formreceipt.Show();
                         this.Close();

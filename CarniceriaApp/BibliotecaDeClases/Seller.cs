@@ -109,7 +109,7 @@ namespace BibliotecaDeClases
                 throw new NumeroNegativoException($"El indice ingresado es negativo ({index}). El indice debe ser siempre positivo");
             }
             products[index].Price = newPrice;
-            CarniceriaDBConnection.UpdatePrice(products[index].ID, newPrice);
+            SellersDBConnection.UpdatePrice(products[index].ID, newPrice);
         }
 
         public void AddStock(List<Product> products, int index, int stock)
@@ -119,7 +119,7 @@ namespace BibliotecaDeClases
                 throw new NumeroNegativoException($"El indice ingresado es negativo ({index}). El indice debe ser siempre positivo");
             }
             products[index].Stock += stock;
-            CarniceriaDBConnection.UpdateStock(products[index].ID, stock, true);
+            SellersDBConnection.UpdateStock(products[index].ID, stock, true);
         }
 
        
@@ -130,7 +130,7 @@ namespace BibliotecaDeClases
             {
                 throw new NumeroNegativoException($"El indice ingresado es negativo ({productIndex}). El indice debe ser siempre positivo");
             }
-            CarniceriaDBConnection.UpdateStock(products[productIndex].ID, quantity,true);
+            SellersDBConnection.UpdateStock(products[productIndex].ID, quantity,true);
             products[productIndex].Stock -= quantity; 
             for (int i = 0; i < quantity; i++)
             {
